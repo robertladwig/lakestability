@@ -1,0 +1,176 @@
+SiteID,LakeID,LakeName,AlternateLakeName,LakeOrReservoir,CountryOfLake,Region,Latitude,Longitude,Elevation_m,SurfaceArea_km2,Volume_km3,MaxDepth_m,MeanDepth_m,Secchi_m,Chlorophyll_ug_L,TotalPhosphorus_ug_L,DissolvedOrganicCarbon_mg_L,Contributor,ContributorContact,ContributorInstitution
+1,10,Batorino,,Lake,Belarus,Minsk region,54.84665,26.9676,163,6.3,0.02,5.5,3,1.13,11.95,35.27,11.95,Boris Adamovich,belaqualab@gmail.com,Belarussian State University
+1,91,Myastro,,Lake,Belarus,Minsk region,54.86692,26.880517,162,13.1,0.07,11.3,5.4,3.35,6.67,38.87,8.83,Boris Adamovich,belaqualab@gmail.com,Belarussian State University
+1,92,Naroch,,Lake,Belarus,Minsk region,54.886267,26.720033,161,79.6,0.71,24.8,8.9,6.95,1.38,15.07,5.4,Boris Adamovich,belaqualab@gmail.com,Belarussian State University
+2,90,Müggelsee,,Lake,Germany,Berlin,52.435,13.659,34,7.43,0.04,7.7,4.9,1.37,42.02,163.49,7.44,Rita Adrian,adrian@igb-berlin.de,IGB-Berlin
+3,5,Annecy,,Lake,France,Haute-Savoie,45.873,6.165,447,26.5,1.13,65,42,6,NA,7,NA,Orlane Anneville,orlane.anneville@inra.fr,INRA: UMR CARRTEL
+3,17,Bourget,,Lake,France,Savoie,45.756,5.86,231.5,44.5,3.6,147,80,5.94,3.5,10,NA,Orlane Anneville,orlane.anneville@inra.fr,INRA: UMR CARRTEL
+3,46,Geneva,Léman,Lake,France/Switzerland,Haute-Savoie,46.453,6.594,372,580.1,89,309,152.7,5.5,6.2,20.3,NA,Orlane Anneville,orlane.anneville@inra.fr,INRA: UMR CARRTEL
+4,83,Mascardi,,Lake,Argentina,Río Negro,-41.328,-71.511,807,39.2,4.35,218,111,18,0.58,2.93,0.51,Beatriz Modenutti; Esteban Balseiro,bmodenutti@comahue-conicet.gob.ar; ebalseiro@comahue-conicet.gob.ar,University of Comahue: INIBIOMA; CONICET
+5,14,Biwa,,Lake,Japan,Shiga Prefecture,35.3095,136.1219444,84.37,670.25,27.5,103.58,41.2,NA,NA,NA,NA,Syuhei Ban,ban@ses.usp.ac.jp,University of Shiga Prefecture
+6,23,Castle,,Lake,United States,California,41.2267,-122.3841,1646,0.2,NA,35,11.4,11.5,2.6,10.3,1.54,Sudeep Chandra,limnosudeep@me.com,University of California Davis
+7,43,Flathead,,Lake,United States,Montana,47.901667,-114.104167,882,495.9,23.12,105,39,10.3,1.13,5.08,1.34,Shawn Devlin,shawn.devlin@flbs.umt.edu; bonnie.ellis@flbs.umt.edu; jack.stanford@flbs.umt.edu,University of Montana
+8,87,Mondsee,,Lake,Austria,Upper Austria,47.823333,13.374722,481,13.8,0.5,68,36,4.9,3.2,6.7,NA,Martin Dokulil; Josef Wanzenböck,martin.dokulil@univie.ac.at,"University Innsbruck; Research Department for Limnology Mondsee
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+"
+9,7,Atitlán,,Lake,Guatemala,Sololá,14.7443,-91.1375,1562,126,25,324,203,7,3.23,32,NA,Margaret Dix,margaret.dix@gmail.com,Universidad del Valle
+10,97,North Pine,Lake Samsonvale,Lake,Australia,Queensland,-27.26405,152.93585,32,20.75,0.21,NA,10.1,1.22,28.2,40,6.26,Natalie Fogarty,Natalie.Fogarty@seqwater.com.au,Seqwater
+10,128,Somerset,Lake Somerset,Lake,Australia,Queensland,-27.1149,152.55735,100.45,42.1,0.38,NA,9.3,1.38,6.56,70,5.7,Natalie Fogarty,Natalie.Fogarty@seqwater.com.au,Seqwater
+11,6,Annie,,Lake,United States,Florida,27.206419,-81.352534,33.7,0.37,0.003,20.7,8.26,4.53,4.54,7.5,7.66,Evelyn Gaiser; Hilary Swain,gaisere@fiu.edu; hswain@archbold-station.org,Florida International University and Archbold Biological Station
+12,29,Crater,,Lake,United States,Oregon,42.94,-122.11,1882,53.4,18.7,594,350,30.8,0.05,22,0.1,Scott Girdner,scott_girdner@nps.gov,Crater Lake National Park
+14,40,Eucha,,Reservoir,United States,Oklahoma,36.375,-94.934,237,11.38,0.09,28.3,NA,1.8,18,29.3,NA,David Hambright,dhambright@ou.edu,University of Oklahoma
+14,48,Grand Lake O' the Cherokees,Grand Lake,Reservoir,United States,Oklahoma,36.472,-95.033,227,169.07,1.9,21,NA,1.1,13,60,NA,David Hambright,dhambright@ou.edu,University of Oklahoma
+14,130,Spavinaw,,Reservoir,United States,Oklahoma,36.385,-95.047,201,6.39,0.03,14,NA,1.4,17.7,28.4,NA,David Hambright,dhambright@ou.edu,University of Oklahoma
+14,139,Texoma,,Reservoir,United States,Oklahoma/ Texa,33.831,-96.572,188,356.12,3.4,31,11,1.8,16.8,105.6,NA,David Hambright,dhambright@ou.edu,University of Oklahoma
+14,140,Thunderbird,,Reservoir,United States,Oklahoma,35.221,-97.22,317,21.76,0.15,17.7,4.7,0.5,15,211.5,NA,David Hambright,dhambright@ou.edu,University of Oklahoma
+15,98,Okareka,,Lake,New Zealand,Rotorua/Bay of Plenty,-38.167,176.367,355,3.4,0.07,34,20,8,3.9,9.1,NA,David Hamilton; Chris McBride,david.p.hamilton@griffith.edu.au; cmcbride@waikato.ac.nz,Griffith University; University of Waikato
+15,99,Okaro,,Lake,New Zealand,Rotorua/Bay of Plenty,-38.3,176.395,419.7,0.3,NA,18,6,2.5,30,58.1,NA,David Hamilton; Chris McBride,david.p.hamilton@griffith.edu.au; cmcbride@waikato.ac.nz,Griffith University; University of Waikato
+15,100,Okataina,,Lake,New Zealand,Rotorua/Bay of Plenty,-38.133,176.406,302,10.73,0.28,78.5,26.2,10,2.2,11,NA,David Hamilton; Chris McBride,david.p.hamilton@griffith.edu.au; cmcbride@waikato.ac.nz,Griffith University; University of Waikato
+15,117,Rerewhakaaitu,,Lake,New Zealand,Rotorua/Bay of Plenty,-38.293,176.501,438,5.17,0.03,15.8,5.3,4.9,4.3,10.7,NA,David Hamilton; Chris McBride,david.p.hamilton@griffith.edu.au; cmcbride@waikato.ac.nz,Griffith University; University of Waikato
+15,119,Rotoehu,,Lake,New Zealand,Rotorua/Bay of Plenty,-38.0167,176.533,295,7.9,0.06,13.5,8.16,3.2,8.5,37.1,NA,David Hamilton; Chris McBride,david.p.hamilton@griffith.edu.au; cmcbride@waikato.ac.nz,Griffith University; University of Waikato
+15,120,Rotoiti,,Lake,New Zealand,Rotorua/Bay of Plenty,-38.04,176.438,279,34.3,1.42,126,42,6.3,5.3,19.6,NA,David Hamilton; Chris McBride,david.p.hamilton@griffith.edu.au; cmcbride@waikato.ac.nz,Griffith University; University of Waikato
+15,121,Rotoma,,Lake,New Zealand,Rotorua/Bay of Plenty,-38.055,176.587,316,11.6,0.31,83,27.7,13.8,1.1,5.4,NA,David Hamilton; Chris McBride,david.p.hamilton@griffith.edu.au; cmcbride@waikato.ac.nz,Griffith University; University of Waikato
+15,122,Rotorua,,Lake,New Zealand,Rotorua/Bay of Plenty,-38.07,176.258,280,80.48,0.81,44.8,10.8,2.8,13.2,22.1,NA,David Hamilton; Chris McBride,david.p.hamilton@griffith.edu.au; cmcbride@waikato.ac.nz,Griffith University; University of Waikato
+15,141,Tikitapu,Bue Lake,Lake,New Zealand,Rotorua/Bay of Plenty,-38.12,176.333,418,1.44,0.03,27.5,18,6.7,1.9,5.4,NA,David Hamilton; Chris McBride,david.p.hamilton@griffith.edu.au; cmcbride@waikato.ac.nz,Griffith University; University of Waikato
+16,101,Okeechobee,,Lake,United States,Florida,26.967,-80.833,4.6,1780,5.2,5.5,2.7,0.625,25.25,75.25,NA,Karl Havens,khavens@ufl.edu,University of Florida
+17,22,Byglandsfjorden,,Lake,Norway,Aust-Agder,58.7769,7.8178,203,33,1.99,167,NA,NA,NA,NA,NA,Dag Hessen; Koji Tominaga,d.o.hessen@ibv.uio.no; koji.tominaga@ibv.uio.no,The Norwegian Water Resources and Energy Directorate; University of Oslo
+17,56,Hornindalsvatnet,,Lake,Norway,Sogn og Fjordane,61.9499,6.3942,53,51,12.06,514,NA,13.2,1.1,3.3,NA,Dag Hessen; Koji Tominaga,d.o.hessen@ibv.uio.no; koji.tominaga@ibv.uio.no,The Norwegian Water Resources and Energy Directorate; University of Oslo
+17,85,Mjøsa,,Lake,Norway,Hedmark/Oppland,60.6896,11.0591,123,362,56.24,453,NA,5.3,4.5,6.3,NA,Dag Hessen; Koji Tominaga,orlane.anneville@inra.fr,The Norwegian Water Resources and Energy Directorate; University of Oslo
+17,104,Øyeren,,Lake,Norway,Akershus,59.8525,11.18,101,85,1.02,76,NA,1.9,4.6,12.5,NA,Dag Hessen; Koji Tominaga,d.o.hessen@ibv.uio.no; koji.tominaga@ibv.uio.no,The Norwegian Water Resources and Energy Directorate; University of Oslo
+17,124,Selbusjøen,,Lake,Norway,Trøndelag,63.2426,10.9909,157,58,4.03,206,NA,4.5,1.8,4.8,NA,Dag Hessen; Koji Tominaga,d.o.hessen@ibv.uio.no; koji.tominaga@ibv.uio.no,The Norwegian Water Resources and Energy Directorate; University of Oslo
+17,134,Strynevatnet,,Lake,Norway,Sogn og Fjordane,61.9281,7.0391,29,23,3.1,230,NA,5.2,2.1,4.5,NA,Dag Hessen; Koji Tominaga,d.o.hessen@ibv.uio.no; koji.tominaga@ibv.uio.no,The Norwegian Water Resources and Energy Directorate; University of Oslo
+18,57,IISD Experimental Lake 222,222,Lake,Canada,Ontario,49.69625,-93.72222222,NA,0.16,0.000599082,5.8,3.7,1.64,3.31,10.75,10.4487,Scott Higgins,shiggins@iisd-ela.org,IISD Experimental Lakes Area Inc.
+18,58,IISD Experimental Lake 224,224,Lake,Canada,Ontario,49.69,-93.71722222,NA,0.26,0.003004064,27.4,11.6,6.09,0.93,6.09,3.46,Scott Higgins,shiggins@iisd-ela.org,IISD Experimental Lakes Area Inc.
+18,59,IISD Experimental Lake 239,239,Lake,Canada,Ontario,49.66305556,-93.7222222,393,0.56,0.0057,30.4,10.5,3.48,2.2,7.54,7.73,Scott Higgins,shiggins@iisd-ela.org,IISD Experimental Lakes Area Inc.
+18,60,IISD Experimental Lake 240,240,Lake,Canada,Ontario,49.65444444,-93.72611111,NA,0.44,0.0027,13.1,6.1,3,1.97,5.43,7.08,Scott Higgins,shiggins@iisd-ela.org,IISD Experimental Lakes Area Inc.
+18,61,IISD Experimental Lake 373,373,Lake,Canada,Ontario,49.74375,-93.79972222,NA,0.27,0.003012513,20.8,11,5.61,0.96,6.77,4.24,Scott Higgins,shiggins@iisd-ela.org,IISD Experimental Lakes Area Inc.
+18,62,IISD Experimental Lake 442,442,Lake,Canada,Ontario,49.77946,-93.818045,NA,0.16,0.001440605,17.8,9,3.83,1.82,7,7.18,Scott Higgins,shiggins@iisd-ela.org,IISD Experimental Lakes Area Inc.
+19,24,Champlain: Mallet's Bay,,Lake,United States,Vermont,44.582,73.281,29.1,54.1,0.72,32,13.35,4.89,3.13,11.7,4.43,Peter Isles,peterdisles@gmail.com,Umeå University
+20,21,Burley-Griffin,,Reservoir,Australia,Australian Capital Territory,-35.29874,149.07303,556,6.64,0.03,17,5,1.08,6.29,34.8,8.4,Klaus Joehnk; David Wright,Klaus.Joehnk@csiro.au; David.Wright@nca.gov.au,"CSIRO; National Capital Authority, Canberra, Australia"
+21,27,Clearwater,,Lake,Canada,Northeastern Ontario,46.3705,-81.0488,267,0.76,0.01,21.5,8.4,8.1,1.1,3.8,2.8,Bill Keller,bkeller@laurentian.ca,Laurentian University
+21,52,Hawley,,Lake,Canada,Subarctic Ontario (Hudson Bay area),54.5269,-84.6288,95,12.35,0.26,54,21.4,4.4,2,6.8,6.3,Bill Keller,bkeller@laurentian.ca,Laurentian University
+21,123,Sans Chambre,,Lake,Canada,Northeastern Ontario,46.7209,-81.1296,379,0.15,NA,15,5.6,6.2,2,7.4,2.5,Bill Keller,bkeller@laurentian.ca,Laurentian University
+21,150,Whitepine,,Lake,Canada,Northeastern Ontario,47.2793,-80.8322,393,0.67,NA,22,5.6,6.4,1.3,5.7,3.3,Bill Keller,bkeller@laurentian.ca,Laurentian University
+22,76,Lillinonah,,Reservoir,United States,Connecticut,41.47806,-73.3464,59,6.26,0.09,33,13,1.76,20.3,27,NA,Jen Klug,jklug@fairfield.edu,Fairfield University
+23,63,Inarijärvi,Inari; Nellim; Paksuvuono,Lake,Finland,Lapland,69.08207,27.92452,118.7,1081.92,15.47,92,14.3,7.85,0.83,3.01,NA,Johanna Korhonen; Merja Pulkkanen,johanna.korhonen@ymparisto.fi;Merja.Pulkkanen@syke.fi,Finnish Environment Insitute SYKE
+23,66,Kallavesi,Kallavesi; Säyneensalo; Kuopio,Lake,Finland,North Savo,62.7616,27.78259,81.8,480.31,4.63,75,9.6,1.98,8.64,19.7,NA,Johanna Korhonen; Merja Pulkkanen,johanna.korhonen@ymparisto.fi;Merja.Pulkkanen@syke.fi,Finnish Environment Insitute SYKE
+23,70,Konnevesi,Konnevesi Näreselkä,Lake,Finland,Central Finland,62.6326,26.60459,95.4,190.28,2.02,57.1,10.6,3.85,4.76,6.23,NA,Johanna Korhonen; Merja Pulkkanen,johanna.korhonen@ymparisto.fi;Merja.Pulkkanen@syke.fi,Finnish Environment Insitute SYKE
+23,71,Konnevesi,Konnevesi Pynnölänniemi,Lake,Finland,Central Finland,62.6326,26.60459,95.4,190.28,2.02,57.1,10.6,3.85,4.76,6.23,NA,Johanna Korhonen; Merja Pulkkanen,johanna.korhonen@ymparisto.fi;Merja.Pulkkanen@syke.fi,Finnish Environment Insitute SYKE
+23,93,Näsijärvi,Näsijärvi;Pengonpohja,Lake,Finland,Pirkanmaa,61.83197,23.81611,95.4,256.48,3.48,65.6,13.6,3,3.32,11.83,NA,Johanna Korhonen; Merja Pulkkanen,johanna.korhonen@ymparisto.fi;Merja.Pulkkanen@syke.fi,Finnish Environment Insitute SYKE
+23,105,Päijänne,Päijänne Linnasaari,Lake,Finland,Central Finland,61.61394,25.48204,78.3,1082.01,15.38,94,14.2,3.53,3.17,8.8,NA,Johanna Korhonen; Merja Pulkkanen,johanna.korhonen@ymparisto.fi;Merja.Pulkkanen@syke.fi,Finnish Environment Insitute SYKE
+23,106,Päijänne,Päijänne Päijätsalo,Lake,Finland,Central Finland,61.61394,25.48204,78.3,1082.01,15.38,94,14.2,3.53,3.17,8.8,NA,Johanna Korhonen; Merja Pulkkanen,johanna.korhonen@ymparisto.fi;Merja.Pulkkanen@syke.fi,Finnish Environment Insitute SYKE
+23,107,Pesiöjärvi,,Lake,Finland,Kainuu,64.94513,28.65023,213.9,12.73,0.05,15.8,3.9,2.1,8.05,12.5,NA,Johanna Korhonen; Merja Pulkkanen,johanna.korhonen@ymparisto.fi;Merja.Pulkkanen@syke.fi,Finnish Environment Insitute SYKE
+23,109,Pielinen,Pielinen Nurmes,Lake,Finland,North Karelia,63.27053,29.60674,93.7,895.47,9.01,61,10.1,2.35,5.76,10.57,NA,Johanna Korhonen; Merja Pulkkanen,johanna.korhonen@ymparisto.fi;Merja.Pulkkanen@syke.fi,Finnish Environment Insitute SYKE
+23,113,Pyhäjärvi,Pyhäjärvi; Säkylä,Lake,Finland,Varsinais-Suomi,61.00108,22.29133,44.9,155.33,0.85,26,5.5,2.59,6.09,19.18,NA,Johanna Korhonen; Merja Pulkkanen,johanna.korhonen@ymparisto.fi;Merja.Pulkkanen@syke.fi,Finnish Environment Insitute SYKE
+24,148,Wallenpaupack,,Reservoir,United States,Pennsylvania,41.413956,-75.24004,361,23.07,0.21,15.8,8.99,2.53,9.54,NA,NA,Lesley Knoll,lbknoll@umn.edu,University of Minnesota Twin Cities
+25,75,Lake Glubokoe,,Lake,Russia,Moscow region,55.753811,36.504601,203,0.6,0.01,30.9,9,4.23,NA,NA,NA,Nikolai Korovchinsky,nmkor@yandex.ru,"Biostation ""Lake Glubokoe"" of the A.N. Severtsov Institute of Ecology and Evolution of the Russian Academy of Sciences"
+26,54,Heywood,,Lake,Antarctica,South Orkney Islands,-60.6901,-45.6086,4,0.04,NA,6,2.3,NA,7.9,NA,NA,Ben Kraemer; Sitoki Lewis,sitoki@hotmail.com,IGB-Berlin
+26,89,Moss,,Lake,Antarctica,South Orkney Islands,-60.6939,-45.623,48,0.02,NA,10.5,3.1,NA,1.9,NA,NA,Ben Kraemer,ben.m.kraemer@gmail.com,IGB-Berlin
+26,95,Nkugute,,Lake,Uganda,Buhinda,-0.3238,30.0993,1080,0.01,NA,59,35,1.39,11.5,50,NA,Ben Kraemer,ben.m.kraemer@gmail.com,IGB-Berlin
+26,127,Sombre,,Lake,Antarctica,South Orkney Islands,-60.6872,-45.6149,10,0.02,NA,11.5,5.5,NA,3.7,NA,NA,Ben Kraemer,ben.m.kraemer@gmail.com,IGB-Berlin
+26,147,Victoria,,Lake,Kenya,Tropical,-0.95,33.03,1135,68000,NA,80,40,3.07,5.95,136,NA,Ben Kraemer,ben.m.kraemer@gmail.com,Technical University of Kenya/KMFRI
+27,64,Iseo,Sebino,Lake,Italy,Lombardy,45.71667,10.06667,186,62,7.57,251,123,3.87,7.3,13.57,NA,Barbara Leoni,barbara.leoni@unimib.it,Milano-Bicocca University
+28,3,Allequash,,Lake,United States,Wisconsin,46.038,-89.621,494,1.68,NA,8,2.9,3.2,7.8,29.3,4.4,Noah Lottig,nrlottig@wisc.edu,University of Wisconsin
+28,12,Big Muskellunge,,Lake,United States,Wisconsin,46.021,-89.612,500,3.96,NA,21.3,7.5,6.6,2.9,17.5,4,Noah Lottig,nrlottig@wisc.edu,University of Wisconsin
+28,31,Crystal Bog,,Lake,United States,Wisconsin,46.008,-89.606,NA,0.01,NA,2.5,1.7,1.5,9.9,18.2,9.5,Noah Lottig,nrlottig@wisc.edu,University of Wisconsin
+28,32,Crystal Lake,,Lake,United States,Wisconsin,46.003,-89.612,502,0.37,NA,20.4,10.4,7.5,1.8,8.3,2.1,Noah Lottig,nrlottig@wisc.edu,University of Wisconsin
+28,42,Fish,,Lake,United States,Wisconsin,43.287,-89.652,NA,0.87,NA,18.9,6.6,2.4,5.1,22.4,7.7,Noah Lottig,nrlottig@wisc.edu,University of Wisconsin
+28,84,Mendota,,Lake,United States,Wisconsin,43.099,-89.405,NA,39.38,NA,25.3,12.8,3,4.8,109.5,6,"Noah Lottig; Robertson, D. 2016. Lake Mendota water temperature secchi depth snow depth ice thickness and meterological conditions 1894 - 2007 ver 1. Environmental Data Initiative. https://doi.org/10.6073/pasta/f20f9a644bd12e4b80cb288f1812c935.",nrlottig@wisc.edu,University of Wisconsin
+28,88,Monona,,Lake,United States,Wisconsin,43.063,-89.361,NA,13.24,NA,22.5,8.2,2.4,8.1,73.5,6,Noah Lottig,nrlottig@wisc.edu,University of Wisconsin
+28,129,Sparkling Lake,,Lake,United States,Wisconsin,46.008,-89.701,495,0.64,NA,20,10.9,6.2,2.2,15,3.3,Noah Lottig,nrlottig@wisc.edu,University of Wisconsin
+28,144,Trout Bog,,Lake,United States,Wisconsin,46.041,-89.686,NA,0.01,NA,7.9,5.6,1.1,16.2,46.6,16.5,Noah Lottig,nrlottig@wisc.edu,University of Wisconsin
+28,145,Trout Lake,,Lake,United States,Wisconsin,46.029,-89.665,492,16.08,NA,35.7,14.6,4.7,3.1,13.5,3.1,Noah Lottig,nrlottig@wisc.edu,University of Wisconsin
+28,152,Wingra,,Lake,United States,Wisconsin,43.053,-89.425,NA,1.4,NA,6.7,2.7,0.7,10.5,40.3,6.7,Noah Lottig,nrlottig@wisc.edu,University of Wisconsin
+29,67,Katepwa,,Lake,Canada,Saskatchewan,50.69,-103.96,478.2,22.6,0.23,22,14.3,1.6,28.6,166.3,11,Peter Leavitt,peter.leavitt@uregina.ca,University of Regina
+30,79,Lugano.North,Ceresio,Lake,Switzerland and Italy,Canton Ticino (Switzerland) and Lombardy (Italy),46.01055556,9.02055556,271,27.5,4.69,288,171,NA,NA,NA,NA,Fabio Lepori,fabio.lepori@supsi.ch,Institute of Earth Sciences; University of Applied Sciences and Arts of Southern Switzerland
+30,80,Lugano.South,Ceresio,Lake,Switzerland and Italy,Canton Ticino (Switzerland) and Lombardy (Italy),45.95861111,8.89361111,271,20.3,1.14,95,55,NA,NA,NA,NA,Fabio Lepori,fabio.lepori@supsi.ch,Institute of Earth Sciences; University of Applied Sciences and Arts of Southern Switzerland
+31,73,Kurilskoye Lake,,Lake,Russia,Kamchatka,51.4207,157.0752,104,77.05,15.04,316,195,8.5,NA,NA,NA,Ekaterina Lepskaya,lepskaya@list.ru,Kamchatka Research Institute of Fisheries & Oceanography
+32,143,Traunsee,,Lake,Austria,Upper Austria,47.85169,13.80288,422,24.4,2.19,191,89.7,4.3,2.1,4.5,NA,Martin Luger,martin.luger@baw.at,"Federal Agency for Water Management, Institute for Aquatic Ecology and Fisheries Management"
+33,9,Bassenthwaite Lake,,Lake,United Kingdom,Cumbria,54.393,-3.133,69,5.3,27.9,19,5.3,2.56,16.76,20.23,NA,Stephen Maberly,scm@ceh.ac.uk,UK Centre for Ecology & Hydrology
+33,15,Blelham Tarn,,Lake,United Kingdom,Cumbria,54.237,-2.588,47,0.1,0.7,14.5,6.8,2,28.41,26.96,NA,Stephen Maberly,scm@ceh.ac.uk,UK Centre for Ecology & Hydrology
+33,33,Derwent Water,,Lake,United Kingdom,Cumbria,54.576,-3.138,75,5.4,29,22,5.5,4.25,7.26,10.54,NA,Stephen Maberly,scm@ceh.ac.uk,UK Centre for Ecology & Hydrology
+33,39,Esthwaite Water,,Lake,United Kingdom,Cumbria,54.365,-2.988,65,1,6.7,15.5,6.9,2.03,27.53,28.04,NA,Stephen Maberly,scm@ceh.ac.uk,UK Centre for Ecology & Hydrology
+33,49,Grasmere,,Lake,United Kingdom,Cumbria,54.27,-3.011,62,0.6,5,21.5,7.7,3.38,13.2,19.44,NA,Stephen Maberly,scm@ceh.ac.uk,UK Centre for Ecology & Hydrology
+33,151,Windermere North Basin,,Lake,United Kingdom,Cumbria,54.24,-2.582,39,8.1,201.8,64,25.1,4.29,8.38,14.04,NA,Stephen Maberly,scm@ceh.ac.uk,UK Centre for Ecology & Hydrology
+34,142,Toolik,,Lake,United States,Alaska,68.38,-149.38,719,1.5,0.01,25,1.7,4.5,1.57,NA,NA,Sally MacIntyre,sally.macintyre@ucsb.edu,University of California Santa Barbara
+35,136,Tanganyika,,Lake,Tanzania,,-4.85,29.59,773,32600,18900,1471,580,12.35,0.61,8.5,2.55,Peter McIntyre; Benjamin Kraemer; Timo Huttula; Pierre-Denis Plisnier; Jouko Sarvala,pmcintyre@wisc.edu; ben.m.kraemer@gmail.com; timohuttula829@gmail.com; pplisnier@gmail.com; jouko.sarvala@utu.fi,FAO; BELSPO
+36,37,Emerald,,Lake,United States,California,36.597591,-118.676023,2800,0.03,0.0002,10,5.95,6.8,1,6.5,0.76,Steve Sadro,ssadro@ucdavis.edu,University of California Davis
+37,102,Opeongo,,Lake,Canada,Ontario,45.7092,-78.3683,404,58.08,0.81,49.4,14.6,4.02,3.04,4.8,4.8,Stephanie Melles,stephanie.melles@ryerson.ca,Ryerson University
+38,112,Plusssee,Plußsee,Lake,Germany,Schleswig-Holstein,54.15,14.38,24,0.14,NA,29,9.4,3.1,NA,51,10,Doerthe Mueller-Navarra,doerthe.mueller-navarra@uni-hamburg.de,University of Hamburg
+39,153,Vulture Lake,,Lake,Canada,Arctic,64.763523,-110.530854,416,1.8,0.02026,42,NA,9.4,0.495,2.157,2.25,Laura Pacholski,laura.pacholski@ddcorp.ca,Dominion Diamond Mines
+40,38,Erken,,Lake,Sweden,Stockhlom/Norrtälje,59.840292,18.625827,11.1,24.2,0.21,20.65,9,4.6,4.6,23.1,9.9,Don Pierson; William Colom-Montero,don.pierson@ebc.uu.se; william.colom@ebc.uu.se,Erken Laboratory; Uppsala University
+41,86,Mohonk,,Lake,United States,New York,41.767879,-74.155622,379,0.07,NA,18.5,6,7.7,2.05,13.6,2.75,Natalie Feldsine; David Richardson; Elizabeth Long,nfeldsine@mohonkpreserve.org; richardsond@newpaltz.edu; elong@mohonkpreserve.org,Mohonk Preserve
+41,135,Sunapee,,Lake,United States,New Hampshire,43.391723,-72.061761,333,16.6,0.2,33.7,10,8.48,1.67,5,2.4,David Richardson; Kathleen Weathers,richardsond@newpaltz.edu; weathersk@caryinstitute.org,SUNY New Paltz; Cary Institute
+42,68,Kinneret,Sea of Galilee,Lake,Israel,Jordan Valley,32.825767,35.587472,-210,166.7,4.23,46.1,25.6,2.66,10.6,12,8.3,Alon Rimmer,alon@ocean.org.il,Israel Oceanographic and Limnological Research; Lake Kinneret Limnological Laboratory
+43,82,Maggiore,,Lake,Italy,Italy,45.944,8.631,193.88,212.5,37.5,370,176.5,6.2,3.66,8.5,0.76,Michela Rogora,m.rogora@ise.cnr.it,CNR Institute of Ecosystem Study
+44,16,Blue Chalk,,Lake,Canada,"Dorset, Ontario",45.1991,-78.9412,343.5,0.5235,0.004468,23,8.5,6.76,2.34,4.24,2.26,Jim Rusak; Andrew Paterson,jim.rusak@ontario.ca; andrew.paterson@ontario.ca,DESC: Dorset Environmental Science Centre
+44,26,Chub,,Lake,Canada,"Dorset, Ontario",45.2141,-78.9834,371,0.3441,0.003042,27,8.9,3.03,2.6,5.4,6.66,Jim Rusak; Andrew Paterson,jim.rusak@ontario.ca; andrew.paterson@ontario.ca,DESC: Dorset Environmental Science Centre
+44,30,Crosson,,Lake,Canada,"Dorset, Ontario",45.0834,-79.0353,332,0.5674,0.005216,25,9.2,3.32,3.97,6.55,5.46,Jim Rusak; Andrew Paterson,jim.rusak@ontario.ca; andrew.paterson@ontario.ca,DESC: Dorset Environmental Science Centre
+44,34,Dickie,,Lake,Canada,"Dorset, Ontario",45.151,-79.0869,354.5,0.936,0.004665,12,5,2.94,4.11,8.06,6.37,Jim Rusak; Andrew Paterson,jim.rusak@ontario.ca; andrew.paterson@ontario.ca,DESC: Dorset Environmental Science Centre
+44,50,Harp,,Lake,Canada,"Dorset, Ontario",45.3803,-79.135,327,0.7138,0.009508,37.5,13.32,4.48,2.19,4.82,4.66,Jim Rusak; Andrew Paterson,jim.rusak@ontario.ca; andrew.paterson@ontario.ca,DESC: Dorset Environmental Science Centre
+44,53,Heney,,Lake,Canada,"Dorset, Ontario",45.1281,-79.1022,345.5,0.2137,0.000705,5.8,3.3,4.31,1.68,6.22,4.01,Jim Rusak; Andrew Paterson,jim.rusak@ontario.ca; andrew.paterson@ontario.ca,DESC: Dorset Environmental Science Centre
+44,111,Plastic,,Lake,Canada,"Dorset, Ontario",45.1799,-78.8242,253.9,0.3214,0.002524,16.3,7.9,7.74,1.37,3.4,2.51,Jim Rusak; Andrew Paterson,jim.rusak@ontario.ca; andrew.paterson@ontario.ca,DESC: Dorset Environmental Science Centre
+44,115,Red Chalk Main,,Lake,Canada,"Dorset, Ontario",45.1906,-78.9478,343,0.4408,0.007352,38,16.7,5.57,2.47,3.9,3.39,Jim Rusak; Andrew Paterson,jim.rusak@ontario.ca; andrew.paterson@ontario.ca,DESC: Dorset Environmental Science Centre
+45,45,Garda,Benaco,Lake,Italy,Veneto; Lombardia; Trentino,45.6975,10.72083333,65,368,49,350,133,5.28,2.49,9.5,NA,Nico Salmaso,nico.salmaso@fmach.it,Fondazione Edmund Mach
+46,96,Nkuruba,none,Lake,Uganda,Kabarole,0.516958,30.302986,1518,0.03,NA,38,16,2,11,40,NA,Emilie Saulnier-Talbot,emiliest@hotmail.com,McGill University
+47,78,Lower Lake Zurich,,Lake,Switzerland,Zurich,47.3,8.6,406,67,3.3,136,49,4.88,3.1,10,1.53,Oliver Köster,Oliver.Koester@zuerich.ch,Eawag
+48,8,Baikal,,Lake,Russia,Siberia,51.88,105.0839,456.4,32500,22300,1750,720,27.5,2.55,4,2.5,Eugene Silow; Svetlana Shimaraeva; Helen Pislegina,eugenesilow@gmail.com; shimaraeva@gmail.com; Helga_64@mail.ru,Irkutsk State University
+49,20,Bubble Pond,,Lake,United States,Maine,44.34499689,-68.23909333,101,0.13,NA,11.9,6.4,9.5,1.38,3.92,2.5,Kristin Strock; Jasmine Saros,Strockk@dickinson.edu; jasmine.saros@maine.edu,University of Maine
+49,36,Eagle,,Lake,United States,Maine,44.36278161,-68.25055703,84,1.77,NA,33.6,13.4,10.8,1.13,2.94,2.1,Kristin Strock; Jasmine Saros,Strockk@dickinson.edu; jasmine.saros@maine.edu,University of Maine
+49,65,Jordan Pond,,Lake,United States,Maine,44.33269018,-68.25522026,84,0.76,NA,45.7,25.6,12.7,1,2.85,2.1,Kristin Strock; Jasmine Saros,Strockk@dickinson.edu; jasmine.saros@maine.edu,University of Maine
+50,2,Aleknagik,,Lake,United States,Alaska,59.33584,-158.782605,10,83,3.57,110,43,8.7,1.2,NA,NA,Daniel Schindler,deschind@uw.edu,University of Washington
+50,11,Beverley,,Lake,United States,Alaska,59.671533,-158.778473,30,90,3.46,188,55,12,1.1,NA,NA,Daniel Schindler,deschind@uw.edu,University of Washington
+50,25,Chignik,,Lake,United States,Alaska,56.257119,-158.829414,5,22,0.6,64,26,1.9,6.9,NA,NA,Daniel Schindler,deschind@uw.edu,University of Washington
+50,55,Hidden,,Lake,United States,Alaska,59.536089,-158.783503,25,0.22,NA,14,4,4.5,9.8,NA,NA,Daniel Schindler,deschind@uw.edu,University of Washington
+50,72,Kulik,,Lake,United States,Alaska,59.800633,-158.891446,43,45,2.8,160,77,11.5,1.2,NA,NA,Daniel Schindler,deschind@uw.edu,University of Washington
+50,77,Little Togiak,,Lake,United States,Alaska,59.578769,-159.15945,23,6,0.18,77,30,10.4,1.7,NA,NA,Daniel Schindler,deschind@uw.edu,University of Washington
+50,81,Lynx,,Lake,United States,Alaska,59.493223,-158.865255,26,1.69,0.01,11,3,4,8.8,NA,NA,Daniel Schindler,deschind@uw.edu,University of Washington
+50,94,Nerka,,Lake,United States,Alaska,59.566908,-159.011117,21,201,7.84,164,39,12.6,1.3,NA,NA,Daniel Schindler,deschind@uw.edu,University of Washington
+50,149,Washington,,Lake,United States,Washington,47.63416,-122.2708,4.9,87.6,2.9,65.2,32.9,5.22,2.09,NA,NA,Daniel Schindler,deschind@uw.edu,University of Washington
+51,108,Piburgersee,Lake Piburg,Lake,Austria,Tyrol,47.195,10.888,913,0.13,NA,24.6,14,7.9,3.39,6.62,2.3,Ruben Sommaruga,ruben.sommaruga@uibk.ac.at,University of Innsbruck; Institute of Ecology
+52,28,Constance,Upper Lake Constance; Bodensee; Bodensee Obersee,Lake,Germany; Switzerland; Austria,,47.624,9.3755,395,473,47.6,251,101,3.5,3.03,7.1,NA,Dietmar Straile; Harald Hetzenauer,dietmar.straile@uni-konstanz.de,Limnological Institute; University of Konstanz; Institut für Seenforschung; Langenargen
+53,35,Douglas,South Fishtail Bay; Douglas Lake,Lake,United States,Michigan,45.5651,-84.6723,217,13.74,0.28,24.38,4.96,4.02,9.06,NA,NA,Jason Tallant,jtallant@umich.edu,University of Michigan
+54,69,Kivu,,Lake,DRC/Rwanda,North Kivu/South Kivu,-2.28,28.98,1463,2370,580,240,485,5.21,2.16,NA,2.4,Wim Thiery,wim.thiery@vub.be,ETH Zurich; Institute for Atmospheric and Climate Science; Vrije Universiteit Brussel; Department of Hydrology and Hydraulic Engineering
+55,1,Acton,,Reservoir,United States,Ohio,39.558974,-84.4737257,286,2.5,0.01,8,4,0.71,62.76,84.12,NA,Mike Vanni; Maria Gonzalez,vannimj@miamioh.edu; gonzalmj@miamioh.edu,Miami University
+56,18,Brunner,,Lake,New Zealand,West Coast Region,-42.617,171.45,186,41,2.26,109,55.00175182,5.4,1.5,6.3,3,Piet Verburg,piet.verburg@niwa.co.nz,NIWA
+56,137,Tarawera,,Lake,New Zealand,Bay of Plenty,-38.2,176.45,298,41,2.31,87,56.37064301,9,1.6,10,2.2,Piet Verburg,piet.verburg@niwa.co.nz,NIWA
+56,138,Taupo,,Lake,New Zealand,Waikato,-38.8069,175.9078,356,616,56.39,160,91.54987825,16,1,5.9,0.8,Piet Verburg,piet.verburg@niwa.co.nz,NIWA
+57,13,Bighorn,,Lake,Canada,Canadian Rockies,51.46,-115.64,2347,0.02,NA,9.5,3.1,6,0.4,2.5,0.5,Rolf Vinebrooke,rolf@ualberta.ca,University of Alberta
+57,51,Harrison,,Lake,Canada,Canadian Rockies,51.55,-115.81,2243,0.08,NA,10.7,5.4,6,0.9,5,2.1,Rolf Vinebrooke,rolf@ualberta.ca,University of Alberta
+57,110,Pipit,,Lake,Canada,Canadian Rockies,51.61,-115.86,2217,0.11,NA,20.6,12.6,7,0.5,2.5,0.6,Rolf Vinebrooke,rolf@ualberta.ca,University of Alberta
+57,126,Snowflake,,Lake,Canada,Canadian Rockies,51.59,-115.83,2320,0.07,NA,12.5,6.1,5,0.7,5,2.5,Rolf Vinebrooke,rolf@ualberta.ca,University of Alberta
+58,114,Pyhäselkä,,Lake,Finland,,62.53,29.75,75.9,361.1,3.16,67,8.76,2.44,5.04,8.13,9.96,Hannu Huuskonen,hannu.huuskonen@uef.fi,University of Eastern Finland
+59,4,Allgjuttern,,Lake,Sweden,,57.9018745,18.4568,126.3,0.19,NA,40.7,11.4,5.3,2.5,4.7,7.5,Gesa Weyhenmeyer,Gesa.Weyhenmeyer@ebc.uu.se,Uppsala University
+59,19,Brunnsjön,,Lake,Sweden,,56.5582667,18.0172,94.4,0.11,NA,10.6,5.3,1.5,3.9,11.9,20.8,Gesa Weyhenmeyer,Gesa.Weyhenmeyer@ebc.uu.se,Uppsala University
+59,41,Fiolen,,Lake,Sweden,,57.0567393,16.5654,226,1.64,0.01,10.5,3.8,4.1,8.3,12.8,8,Gesa Weyhenmeyer,Gesa.Weyhenmeyer@ebc.uu.se,Uppsala University
+59,44,Fräcksjön,,Lake,Sweden,,58.1519145,13.845,58,0.28,NA,14.5,6,2.8,5.4,9.6,9.6,Gesa Weyhenmeyer,Gesa.Weyhenmeyer@ebc.uu.se,Uppsala University
+59,103,Övre Skärsjön,,Lake,Sweden,,59.7810144,17.8262,218.7,1.73,0.01,32,5.7,3.4,2.5,5.9,8.3,Gesa Weyhenmeyer,Gesa.Weyhenmeyer@ebc.uu.se,Uppsala University
+59,116,Remmarsjön,,Lake,Sweden,,63.8072835,20.5384,234.1,1.36,0.01,14.4,5.2,2.2,2.6,10.5,9.4,Gesa Weyhenmeyer,Gesa.Weyhenmeyer@ebc.uu.se,Uppsala University
+59,118,Rotehogstjärnen,,Lake,Sweden,,58.8317554,13.2686,120.5,0.17,NA,9.4,3.4,2.3,9.5,11.6,12.4,Gesa Weyhenmeyer,Gesa.Weyhenmeyer@ebc.uu.se,Uppsala University
+59,131,St Skärsjön,,Lake,Sweden,,56.6621226,14.753,60,0.31,NA,11.5,3.8,3.1,5.5,8.4,5.1,Gesa Weyhenmeyer,Gesa.Weyhenmeyer@ebc.uu.se,Uppsala University
+59,132,Stensjön,,Lake,Sweden,,61.5796057,18.9286,268,0.57,NA,8.5,4.2,2.8,2.7,5.5,7.2,Gesa Weyhenmeyer,Gesa.Weyhenmeyer@ebc.uu.se,Uppsala University
+59,133,Stora Envättern,,Lake,Sweden,,59.0715259,19.8858,62,0.37,NA,11.2,5,3.7,3.7,7.3,10.4,Gesa Weyhenmeyer,Gesa.Weyhenmeyer@ebc.uu.se,Uppsala University
+59,146,Vänern,,Lake,Sweden,,58.9,13.4,44,5648,153,72,27,NA,NA,NA,NA,Gesa Weyhenmeyer,Gesa.Weyhenmeyer@ebc.uu.se,Uppsala University
+60,47,Giles,,Lake,United States,Pennsylvania,41.37611111,-75.0925,428,0.48,NA,24,10.1,7.63,1.4,7.16,2.14,Craig Williamson,craig.williamson@miamioh.edu,Miami University
+60,74,Lacawac,,Lake,United States,Pennsylvania,41.3825,-75.09305556,439,0.21,NA,13,5.2,3.03,3.37,11.16,5.38,Craig Williamson,craig.williamson@miamioh.edu,Miami University
+61,125,Shira,,Lake,Russia,Khakassia; Siberia,54.512288,90.185014,356,35.9,0.39,24,11,4.1,4.97,8.3,7.5,Egor Zadereev; Denis Rogozin; Alexander Tolomeev,egor@ibp.ru,Institute of Biophysics; Krasnoyarsk Research Center SB RAS
