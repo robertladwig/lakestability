@@ -45,6 +45,7 @@ get_meteorology <- function(lakename, datetime, lat, lon, variables, path, passw
     } else if (v == 'mean_surface_downward_short_wave_radiation_flux'){
       swr <- ncvar_get(nc_data, "msdwswrf")
     }
+    nc_close(nc_data)
 
   }
   
@@ -55,7 +56,9 @@ get_meteorology <- function(lakename, datetime, lat, lon, variables, path, passw
            ux = sqrt(1.3 *10^(-3) * 1.43 * 10^(-3) * (sqrt(u10^2 + v10^2))^2),
            lmo = ux^3 /(jb * 0.41)) 
   mean_lmo <- data %>%
-    summarise(lmo = mean(ux)^3 / (mean(jb) * 0.41))
+    summarise(lmo = mean(ux)^3 / (mean(jb) * 0.41),
+              wind = mean((sqrt(u10^2 + v10^2))),
+              swr = mean(swr))
 
   return(list(data, 
               mean_lmo))

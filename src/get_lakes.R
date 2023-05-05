@@ -7,6 +7,8 @@ setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
 library(tidyverse)
 library(ecmwfr)
 library(ncdf4)
+library(lubridate)
+library(rLakeAnalyzer)
 
 # ORIGINAL METADATA
 # Package ID: edi.705.5 Cataloging System:https://pasta.edirepository.org.
@@ -366,13 +368,32 @@ df <- merge(interpolated_data, site_information, by = c("LakeID", "SiteID", "Lak
 # ERA5:
 source("get_meteorology.R")
 
+overall_df <- data.frame(lake = NULL,
+                         date = NULL,
+                         st = NULL,
+                         zv = NULL,
+                         lmo = NULL,
+                         mean_wind = NULL,
+                         mean_swr = NULL)
+
 for (lakes in unique(df$LakeName)){
+  print(paste0(match(lakes, unique(df$LakeName)),'/',length(unique(df$LakeName))))
   
   input <- df %>% filter(LakeName == lakes)
   lat = mean(input$Latitude)
   lon = mean(input$Longitude)
   
+  hypsography = approx.bathy(Zmax = mean(input$MaxDepth_m), lkeArea = mean(input$SurfaceArea_km2 * 1e6), Zmean = mean(input$MeanDepth_m), method = "voldev", zinterval = 0.5)
+  
   for (dates in unique(input$Date)){
+    print(paste0(match(dates, unique(input$Date)),'/',length(unique(input$Date))))
+    
+    input_date <- input %>%
+      filter(Date == dates)
+    
+    st = schmidt.stability(wtr = input_date$Temperature_degCelsius, depths =  input_date$Depth_m, bthA = hypsography$Area.at.z, bthD = hypsography$depths)
+    
+    zv <- hypsography$depths %*% hypsography$Area.at.z / sum(hypsography$Area.at.z, na.rm = TRUE)
     
     output <- get_meteorology(lakename = lakes, 
                               path = '../era5_output/',
@@ -381,6 +402,20 @@ for (lakes in unique(df$LakeName)){
                               lat = lat,
                               lon = lon, 
                               variables = c("10u", "10v","mean_surface_downward_short_wave_radiation_flux"))
+    
+    overall_df <- rbind(overall_df, data.frame(lake = lakes,
+                             date = dates,
+                             st = st,
+                             zv = zv,
+                             lmo = output[[2]][1],
+                             mean_wind = output[[2]][2],
+                             mean_swr = output[[2]][3]))
   }
 }
+
+write_csv(overall_df, file = '../analysis_output/hypothesis_test')
+ggplot(overall_df, aes(lmo/ zv, st)) + geom_point()
+
+
+
 
