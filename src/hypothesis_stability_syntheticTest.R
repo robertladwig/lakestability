@@ -177,14 +177,14 @@ analysis <- data.frame('zmixzv' = NULL,
                        'st_28' = NULL,
                        'st_73' = NULL)
 
-max_depth <- 60
-mean_depth = 12
+max_depth <- 35
+mean_depth = 8
 
 for (mixing_depth in seq(2,30)){
     
-  for (meta_thickness in seq(1)){ #2,20
+  # for (meta_thickness in seq(1)){ #2,20
 
-  # meta_thickness = 0.5 * mixing_depth
+    meta_thickness = 4#floor(seq(2,30)*0.2 +2) #0.5 * mixing_depth
     
   
     temp_profile <- c(seq(25.5,25.0, length.out = floor(mixing_depth)), seq(25, 10, length.out = meta_thickness))
@@ -221,6 +221,7 @@ for (mixing_depth in seq(2,30)){
       geom_point(data = df, aes(density, depth)) +
       geom_hline(yintercept = z_v) +
       geom_hline(yintercept = mean(st_idso$z_g),  linetype = 'dashed') +
+      # geom_hline(yintercept = mean(st$z_v),  linetype = 'dashed') +
       geom_hline(yintercept = mixing_depth,  linetype = 'dotted') +
       ggtitle(paste0('St(28): ', floor(mean(st$St)), ', St(73): ', floor(mean(st_idso$St)), ', zmix: ', mixing_depth)) + 
       scale_y_continuous(trans = "reverse") + 
@@ -230,6 +231,7 @@ for (mixing_depth in seq(2,30)){
       geom_point(data = df, aes(energy_idso, depth)) +
       geom_hline(yintercept = z_v) +
       geom_hline(yintercept = mean(st_idso$z_g),  linetype = 'dashed') +
+      # geom_hline(yintercept = mean(st$z_v),  linetype = 'dashed') +
       geom_hline(yintercept = mixing_depth,  linetype = 'dotted') +
       # ggtitle('idso') +
       scale_y_continuous(trans = "reverse") + 
@@ -246,12 +248,14 @@ for (mixing_depth in seq(2,30)){
       scale_y_continuous(trans = "reverse") + 
       theme_minimal()
     
+
+    
     g <-  g1 + g2 + g3; g
     ggsave(paste0('../figs/',mixing_depth,'_', meta_thickness,'.png'), g)
     
     analysis <- rbind(analysis, data.frame('zmixzv' = mixing_depth/mean(st$z_v), 'metadepth' =meta_thickness,
                                            'st_28' = mean(st$St), 'st_73' = mean(st_idso$St)))  
-  }
+  # }
   
 }
 
@@ -264,6 +268,11 @@ g1 <- ggplot(analysis) +
 g2 <- ggplot(analysis) +
   # geom_point(aes(zmixzv, st_28, col ='1928', size = as.factor(metadepth))) +
   geom_line(aes(zmixzv, st_73, size = as.factor(metadepth), col = as.factor(metadepth))) +
+  theme_minimal()
+
+ggplot(analysis) +
+  # geom_point(aes(zmixzv, st_28, col ='1928', size = as.factor(metadepth))) +
+  geom_line(aes(zmixzv, c(0, diff(st_73)), size = as.factor(metadepth), col = as.factor(metadepth))) +
   theme_minimal()
 
 g2
