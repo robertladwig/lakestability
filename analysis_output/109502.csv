@@ -1,0 +1,7 @@
+Error in warn_or_error(error_msg, error = fail_is_error) : 
+  Data transfer failed with permanent client error: no data is available within your requested subset.
+Reason given: Request returned no data.
+More information at http://copernicus-climate.eu/exc/empty-dataset
+Calls: get_lake_results ... <Anonymous> -> <Anonymous> -> <Anonymous> -> warn_or_error
+Execution halted
+
