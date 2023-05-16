@@ -175,89 +175,100 @@ schmidt.stability_idso = function(wtr, depths, bthA, bthD, sal = 0){
 analysis <- data.frame('zmixzv' = NULL,
                        'metadepth' =NULL,
                        'st_28' = NULL,
-                       'st_73' = NULL)
-
-max_depth <- 35
-mean_depth = 8
-
-for (mixing_depth in seq(2,30)){
-    
-  # for (meta_thickness in seq(1)){ #2,20
-
-    meta_thickness = 4#floor(seq(2,30)*0.2 +2) #0.5 * mixing_depth
-    
+                       'st_73' = NULL,
+                       'max_depth' =NULL,
+                       'mean_depth' = NULL)
+for (max_depth in seq(5, 100, by = 10)){
   
-    temp_profile <- c(seq(25.5,25.0, length.out = floor(mixing_depth)), seq(25, 10, length.out = meta_thickness))
-    temp_profile <- c(temp_profile, seq(10, 9.8, length.out =(max_depth+1) - length(temp_profile)))
-    
-    dens_profile <- water.density(temp_profile)
-    
-    area = seq(4e6, 1e-6, length.out = max_depth)
-    
-    bath_profile <- approx.bathy(Zmax = max_depth, lkeArea = max(area), Zmean = mean_depth, method = 'voldev', zinterval = 1)
-    
-    area_profile <- bath_profile$Area.at.z # seq(4e6, 1e-6, length.out = max_depth)
-    depth_profile <- bath_profile$depths # seq(1, max_depth)
-    
-    z_v <- (area_profile %*% depth_profile) / sum(area_profile)
+  for (mean_depth in seq(2,ceiling(max_depth/2), by = 5)){
     
     
-    st <- schmidt.stability_schmidt(wtr = temp_profile, depths = depth_profile, bthA = area_profile, bthD = depth_profile)
-    st_idso <- schmidt.stability_idso(wtr = temp_profile, 
-                                      depths = depth_profile, 
-                                      bthA = area_profile, 
-                                      bthD = depth_profile)
-    
-    
-    df <- data.frame('depth' = depth_profile,
-                     'density' = dens_profile,
-                     'energy_idso' = st_idso$St_perLayer,
-                     'energy_schmidt' = st$St_perLayer)
-    
-    
-    # sml < z_v: St increases
-    # sml > z_v: St decreases
-    g1 <- ggplot() +
-      geom_point(data = df, aes(density, depth)) +
-      geom_hline(yintercept = z_v) +
-      geom_hline(yintercept = mean(st_idso$z_g),  linetype = 'dashed') +
-      # geom_hline(yintercept = mean(st$z_v),  linetype = 'dashed') +
-      geom_hline(yintercept = mixing_depth,  linetype = 'dotted') +
-      ggtitle(paste0('St(28): ', floor(mean(st$St)), ', St(73): ', floor(mean(st_idso$St)), ', zmix: ', mixing_depth)) + 
-      scale_y_continuous(trans = "reverse") + 
-      theme_minimal()
-    
-    g2 <- ggplot() +
-      geom_point(data = df, aes(energy_idso, depth)) +
-      geom_hline(yintercept = z_v) +
-      geom_hline(yintercept = mean(st_idso$z_g),  linetype = 'dashed') +
-      # geom_hline(yintercept = mean(st$z_v),  linetype = 'dashed') +
-      geom_hline(yintercept = mixing_depth,  linetype = 'dotted') +
-      # ggtitle('idso') +
-      scale_y_continuous(trans = "reverse") + 
-      theme_minimal()
-    
-    g3 <- ggplot() +
-      geom_point(data = df, aes((energy_schmidt), depth)) +
-      geom_hline(yintercept = z_v) +
-      geom_hline(yintercept = mean(st_idso$z_g),  linetype = 'dashed') +
-      geom_hline(yintercept = mixing_depth,  linetype = 'dotted') +
-      geom_vline(xintercept = 0,  linetype = 'solid') +
-      # scale_x_continuous(trans='log10') +
-      # ggtitle('schmidt') +
-      scale_y_continuous(trans = "reverse") + 
-      theme_minimal()
-    
-
-    
-    g <-  g1 + g2 + g3; g
-    ggsave(paste0('../figs/',mixing_depth,'_', meta_thickness,'.png'), g)
-    
-    analysis <- rbind(analysis, data.frame('zmixzv' = mixing_depth/mean(st$z_v), 'metadepth' =meta_thickness,
-                                           'st_28' = mean(st$St), 'st_73' = mean(st_idso$St)))  
-  # }
-  
+    for (mixing_depth in seq(2,min(floor(max_depth/2), 15))){
+      
+      for (meta_thickness in seq(2,min(floor(mean_depth/2)+1, 10), by = 1)){ #2,20
+        
+        # meta_thickness = 4#floor(seq(2,30)*0.2 +2) #0.5 * mixing_depth
+        
+        initi_temp = seq(25.5, 25.0, length.out = floor(mixing_depth)) + (100 / (1000  * 4184 * mixing_depth) * 86400)
+        
+        temp_profile <- c(initi_temp, seq(initi_temp[length(initi_temp)], 10, length.out = meta_thickness))
+        temp_profile <- c(temp_profile, seq(10, 9.8, length.out =(max_depth+1) - length(temp_profile)))
+        
+        dens_profile <- water.density(temp_profile)
+        
+        area = seq(4e6, 1e-6, length.out = max_depth)
+        
+        bath_profile <- approx.bathy(Zmax = max_depth, lkeArea = max(area), Zmean = mean_depth, method = 'voldev', zinterval = 1)
+        
+        area_profile <- bath_profile$Area.at.z # seq(4e6, 1e-6, length.out = max_depth)
+        depth_profile <- bath_profile$depths # seq(1, max_depth)
+        
+        z_v <- (area_profile %*% depth_profile) / sum(area_profile)
+        
+        
+        st <- schmidt.stability_schmidt(wtr = temp_profile, depths = depth_profile, bthA = area_profile, bthD = depth_profile)
+        st_idso <- schmidt.stability_idso(wtr = temp_profile, 
+                                          depths = depth_profile, 
+                                          bthA = area_profile, 
+                                          bthD = depth_profile)
+        
+        
+        df <- data.frame('depth' = depth_profile,
+                         'density' = dens_profile,
+                         'energy_idso' = st_idso$St_perLayer,
+                         'energy_schmidt' = st$St_perLayer)
+        
+        
+        # sml < z_v: St increases
+        # sml > z_v: St decreases
+        g1 <- ggplot() +
+          geom_point(data = df, aes(density, depth)) +
+          geom_hline(yintercept = z_v) +
+          geom_hline(yintercept = mean(st_idso$z_g),  linetype = 'dashed') +
+          # geom_hline(yintercept = mean(st$z_v),  linetype = 'dashed') +
+          geom_hline(yintercept = mixing_depth,  linetype = 'dotted') +
+          ggtitle(paste0('St(28): ', floor(mean(st$St)), ', St(73): ', floor(mean(st_idso$St)), ', zmix: ', mixing_depth)) + 
+          scale_y_continuous(trans = "reverse") + 
+          theme_minimal()
+        
+        g2 <- ggplot() +
+          geom_point(data = df, aes(energy_idso, depth)) +
+          geom_hline(yintercept = z_v) +
+          geom_hline(yintercept = mean(st_idso$z_g),  linetype = 'dashed') +
+          # geom_hline(yintercept = mean(st$z_v),  linetype = 'dashed') +
+          geom_hline(yintercept = mixing_depth,  linetype = 'dotted') +
+          # ggtitle('idso') +
+          scale_y_continuous(trans = "reverse") + 
+          theme_minimal()
+        
+        g3 <- ggplot() +
+          geom_point(data = df, aes((energy_schmidt), depth)) +
+          geom_hline(yintercept = z_v) +
+          geom_hline(yintercept = mean(st_idso$z_g),  linetype = 'dashed') +
+          geom_hline(yintercept = mixing_depth,  linetype = 'dotted') +
+          geom_vline(xintercept = 0,  linetype = 'solid') +
+          # scale_x_continuous(trans='log10') +
+          # ggtitle('schmidt') +
+          scale_y_continuous(trans = "reverse") + 
+          theme_minimal()
+        
+        
+        
+        g <-  g1 + g2 + g3; g
+        ggsave(paste0('../figs/max',max_depth,'_mean:',mean_depth,'_mix:',mixing_depth,'_meta:', meta_thickness,'.png'), g)
+        
+        analysis <- rbind(analysis, data.frame('zmixzv' = mixing_depth/mean(st$z_v), 'metadepth' =meta_thickness,
+                                               'st_28' = mean(st$St), 'st_73' = mean(st_idso$St),
+                                               'max_depth' =max_depth,
+                                               'mean_depth' = mean_depth))  
+      }
+      
+    }
+  }
 }
+# max_depth <- 35
+# mean_depth = 8
+
 
 
 g1 <- ggplot(analysis) +
