@@ -558,6 +558,7 @@ setwd('~/Documents/lakestability/src/')
 library(tidyverse)
 library(lubridate)
 library(rLakeAnalyzer)
+library(zoo)
 
 head(df_temp)
 head(df_wind)
@@ -599,7 +600,7 @@ overall_df <- data.frame(date = NULL,
                          wind = NULL,
                          swr = NULL)
 
-for (dates in unique(input_temp$datetime)){
+for (dates in unique(input_temp$datetime)[42232:length(unique(input_temp$datetime))]){
   
   # dates = unique(input_temp$datetime)[4903]
   print(paste0(match(dates, unique(input_temp$datetime)),'/',length( unique(input_temp$datetime))))
@@ -611,6 +612,8 @@ for (dates in unique(input_temp$datetime)){
   if (all(is.na(input$wtemp))){
     next
   }
+  
+  input$wtemp <- na.approx(input$wtemp, rule = 2)
   
   dz = 0.1
   depth = seq(min(input_hypsography$depth), max(input_hypsography$depth), dz)
@@ -626,7 +629,12 @@ for (dates in unique(input_temp$datetime)){
   
   interp_temp = approx(input$depth, input$wtemp, depth)$y
   
+  if (sd(interp_temp) == 0){
+    st = data.frame('St' = NA, 'z_g' = NA)
+  } else{
     st = schmidt.stability_idso(wtr = interp_temp, depths = depth, bthA = area, bthD = depth)
+  }
+    
     
     zv <- depth%*% area/ sum(area, na.rm = TRUE)
     
@@ -643,7 +651,7 @@ for (dates in unique(input_temp$datetime)){
 
     
 
-    overall_df <- rbind(overall_df, data.frame(date = dates,
+    overall_df <- rbind(overall_df, data.frame(date = unique(input_temp$datetime)[match(dates, unique(input_temp$datetime))],
                                                st = st$St,
                                                zv = zv,
                                                zg = st$z_g, 
@@ -653,22 +661,26 @@ for (dates in unique(input_temp$datetime)){
     # print(overall_df)
 }
 
-write_csv(overall_df, file = '../data/trout.csv')
+write_csv(overall_df, file = '../data/trout_analysis.csv')
 
 library(patchwork)
 
 g1 <- ggplot(overall_df) +
-  geom_line(aes(lmo/zv, st, group = dates)) +
+  geom_point(aes(lmo/zv, st)) +
   labs(x = 'Mixing:Volume depth', y = 'Energy') +
+  geom_vline(xintercept = 1, linetype="dashed") +
+  xlim(0, 5) +
   theme_minimal()
 
 g2 <- ggplot(overall_df) +
-  geom_line(aes(lmo/zg, st, group = dates)) +
+  geom_point(aes(lmo/zg, st)) +
   labs(x = 'Mixing:Avg density depth', y = 'Energy') +
+  geom_vline(xintercept = 1, linetype="dashed") +
+  xlim(0, 5) +
   theme_minimal()
 
-g3 <- ggplot(overall_df) +
-  geom_point(aes(zg, zv, col = lmo)) +
+g3 <- ggplot(overall_df,aes(zg, zv)) +
+  geom_point(aes(zg, zv, col = st)) +
   labs(x = 'Avg density depth', y = 'Volume depth', col = 'Mixing depth') +
   theme_minimal()
 
