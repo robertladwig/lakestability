@@ -182,14 +182,23 @@ analysis <- data.frame('zmixzv' = NULL,
                        'st_73' = NULL,
                        'max_depth' =NULL,
                        'mean_depth' = NULL)
-for (max_depth in seq(5, 100, by = 10)){
+for (max_depth in c(seq(2,20,by = 2), seq(20, 200, by = 10))){
   
-  for (mean_depth in seq(2,ceiling(max_depth/2), by = 5)){
+  if (max_depth < 25){
+    seq_mean <- seq(1,ceiling(max_depth/2), by = 1)
+  } else {
+    seq_mean <-  seq(1,ceiling(max_depth/2), by = 5)
+  }
+  for (mean_depth in seq_mean){
     
-    
-    for (mixing_depth in seq(2,min(floor(max_depth/2), 15))){
+    if (max_depth < 25){
+      seq_mixing <- seq(1,ceiling(max_depth/2), by = 1)
+    } else {
+      seq_mixing <-  seq(1,ceiling(max_depth/2), by = 5)
+    }
+    for (mixing_depth in seq_mixing){
       
-      for (meta_thickness in seq(2,min(floor(mean_depth/2)+1, 10), by = 1)){ #2,20
+      for (meta_thickness in seq(1,min(ceiling(mean_depth/2), 10), by = 2)){ #2,20
         
         # meta_thickness = 4#floor(seq(2,30)*0.2 +2) #0.5 * mixing_depth
         
@@ -339,6 +348,7 @@ ggsave(plot = g_fig2, filename = "../figs/Fig02.png", dpi = 300, width = 9, heig
   # for (mean_depth in seq(2,ceiling(max_depth/2), by = 5)){
     
   analysis_example <- data.frame('zmixzv' = NULL,
+                                 'zgzv' = NULL,
                          'metadepth' =NULL,
                          'st_28' = NULL,
                          'st_73' = NULL,
@@ -389,7 +399,7 @@ ggsave(plot = g_fig2, filename = "../figs/Fig02.png", dpi = 300, width = 9, heig
           # geom_hline(yintercept = mean(st$z_v),  linetype = 'dashed') +
           geom_hline(yintercept = mixing_depth,  linetype = 'dotted') +
           labs(x = expression(paste("Density (kg ",m^-3,")")), y = "Depth (m)") +
-          ggtitle(paste0('Schmidt stability: ', floor(mean(st_idso$St)), 'W/m2, zmix: ', mixing_depth,' m, zmix/zv: ', round(mixing_depth/z_v,2))) +
+          ggtitle(paste0('Schmidt stability: ', floor(mean(st_idso$St)), 'W/m2, zmix: ', mixing_depth,' m, zmix/zv: ', round(mixing_depth/z_v,2),' m, zmean/zv: ', round( mean(st_idso$z_g)/ mean(st$z_v),2))) +
           scale_y_continuous(trans = "reverse") + 
           theme_minimal()
         
@@ -421,7 +431,9 @@ ggsave(plot = g_fig2, filename = "../figs/Fig02.png", dpi = 300, width = 9, heig
         g <-  g1 + g2 + g3; g
         ggsave(paste0('../figs/example:max',max_depth,'_mean:',mean_depth,'_mix:',mixing_depth,'_meta:', meta_thickness,'.png'), g, width = 7, height = 6, units = 'in')
         
-        analysis_example <- rbind(analysis_example, data.frame('zmixzv' = mixing_depth/mean(st$z_v), 'metadepth' =meta_thickness,
+        analysis_example <- rbind(analysis_example, data.frame('zmixzv' = mixing_depth/mean(st$z_v), 
+                                                               'zgzv' = mean(st_idso$z_g)/ mean(st$z_v), 
+                                                               'metadepth' =meta_thickness,
                                                'st_28' = mean(st$St), 'st_73' = mean(st_idso$St),
                                                'max_depth' =max_depth,
                                                'mean_depth' = mean_depth))  
@@ -429,6 +441,8 @@ ggsave(plot = g_fig2, filename = "../figs/Fig02.png", dpi = 300, width = 9, heig
   
   ggplot(analysis_example) +
     geom_line(aes(zmixzv, st_73))
+  ggplot(analysis_example) +
+    geom_line(aes(zgzv, st_73))
   
     # }
   # }
