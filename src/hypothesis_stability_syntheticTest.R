@@ -440,7 +440,7 @@ ggsave(plot = g_fig2, filename = "../figs/Fig02.png", dpi = 300, width = 9, heig
       }
   
   ggplot(analysis_example) +
-    geom_line(aes(zmixzv, st_73))
+    geom_line(aes(zmixzv, st_73)) +
   ggplot(analysis_example) +
     geom_line(aes(zgzv, st_73))
   
