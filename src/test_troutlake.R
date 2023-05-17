@@ -554,8 +554,8 @@ schmidt.stability_idso = function(wtr, depths, bthA, bthD, sal = 0){
 
 
 setwd('~/Documents/lakestability/src/')
-# setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
-library(tidyverse)
+setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
+library(dplyr)
 library(lubridate)
 library(rLakeAnalyzer)
 library(zoo)
@@ -576,7 +576,10 @@ input_temp <- df_temp %>%
   mutate(datetime = as.POSIXct(paste0(sampledate," ",substr(sprintf("%04d",hour),1,2),":00:00")),
          year = year(datetime)) %>%
   filter(year >= 2005 & year <= 2016 ) %>%
-  select(datetime, depth, wtemp) 
+  select(datetime, depth, wtemp) %>%
+  mutate(day = as.Date(datetime)) %>%
+  group_by(day, depth) %>%
+  summarise(wtemp = mean(wtemp, na.rm = T))
   
 
 input_wind <- df_wind %>%
@@ -590,7 +593,13 @@ input_radiation<- df_radiation %>%
          avg_shortwave_rad_licor = ifelse(avg_shortwave_rad_licor >= 0, avg_shortwave_rad_licor, 0)) %>%
   select(datetime, avg_shortwave_rad_licor)
 
-input_meteorology <- merge(input_radiation, input_wind, by = 'datetime')
+input_meteorology <- merge(input_radiation, input_wind, by = 'datetime') 
+
+input_meteorology <- input_meteorology %>%
+  mutate(day = as.Date(datetime)) %>%
+  group_by(day) %>%
+  summarise(avg_shortwave_rad_licor = mean(avg_shortwave_rad_licor, na.rm = T),
+            avg_wind_speed = mean(avg_wind_speed, na.rm =T))
 
 overall_df <- data.frame(date = NULL,
                          st = NULL,
@@ -599,15 +608,17 @@ overall_df <- data.frame(date = NULL,
                          lmo = NULL,
                          wind = NULL,
                          swr = NULL)
-
-for (dates in unique(input_temp$datetime)[42232:length(unique(input_temp$datetime))]){
+tt = 1
+for (dates in as.POSIXct(unique(input_temp$day))){
   
+  orig_dates = as.POSIXct(unique(input_temp$day))[tt]
+  tt = tt +1
   # dates = unique(input_temp$datetime)[4903]
-  print(paste0(match(dates, unique(input_temp$datetime)),'/',length( unique(input_temp$datetime))))
+  print(paste0(match(orig_dates, unique(input_temp$day)),'/',length( unique(input_temp$day))))
   
 
   
-  input <- input_temp %>% filter(datetime == dates)
+  input <- input_temp %>% filter(day == orig_dates)
   
   if (all(is.na(input$wtemp))){
     next
@@ -620,11 +631,11 @@ for (dates in unique(input_temp$datetime)[42232:length(unique(input_temp$datetim
   area = approx(input_hypsography$depth, input_hypsography$area, depth)$y
   
   if (max(input$depth) < max(depth)){
-    input <- rbind(input, data.frame('datetime' = mean(input$datetime), 'depth' = max(depth), 'wtemp' = input$wtemp[length(input$wtemp)]))
+    input <- rbind(input, data.frame('day' = mean(input$day), 'depth' = max(depth), 'wtemp' = input$wtemp[length(input$wtemp)], 'datetime' = NA))
   }
   
   if (min(input$depth) > min(depth)){
-    input <- rbind(data.frame('datetime' = mean(input$datetime), 'depth' = min(depth), 'wtemp' = input$wtemp[1]), input)
+    input <- rbind(data.frame('day' = mean(input$day), 'depth' = min(depth), 'wtemp' = input$wtemp[1], 'datetime' = NA), input)
   }
   
   interp_temp = approx(input$depth, input$wtemp, depth)$y
@@ -634,16 +645,18 @@ for (dates in unique(input_temp$datetime)[42232:length(unique(input_temp$datetim
   } else{
     st = schmidt.stability_idso(wtr = interp_temp, depths = depth, bthA = area, bthD = depth)
   }
+  
+  meta_depths = meta.depths(wtr = interp_temp, depths = depth)
     
     
     zv <- depth%*% area/ sum(area, na.rm = TRUE)
     
     if (nrow(input_meteorology %>%
-           filter(datetime == dates) ) == 0){
+           filter(day == orig_dates) ) == 0){
       next
     } else {
       meteo <- input_meteorology %>%
-        filter(datetime == dates) %>%
+        filter(day == orig_dates) %>%
         mutate(jb = (207 * 10^(-6) * 9.81)/(4180 * 1000) * avg_shortwave_rad_licor / 1e3 * 1000,
                ux = sqrt(1.3 *10^(-3) * 1.43 * 10^(-3) * (avg_wind_speed)^2),
                lmo = ux^3 /(jb * 0.41)) 
@@ -651,40 +664,70 @@ for (dates in unique(input_temp$datetime)[42232:length(unique(input_temp$datetim
 
     
 
-    overall_df <- rbind(overall_df, data.frame(date = unique(input_temp$datetime)[match(dates, unique(input_temp$datetime))],
+    overall_df <- rbind(overall_df, data.frame(date = orig_dates,
                                                st = st$St,
                                                zv = zv,
                                                zg = st$z_g, 
+                                               upper = meta_depths[1],
+                                               lower = meta_depths[2],
                                                lmo = meteo$lmo,
                                                wind = meteo$avg_wind_speed,
                                                swr = meteo$avg_shortwave_rad_licor))
+    # print(dates)
     # print(overall_df)
 }
 
-write_csv(overall_df, file = '../data/trout_analysis.csv')
+write.csv(overall_df, file = '../data/trout_analysis.csv')
 
 library(patchwork)
+library(ggplot2)
 
-g1 <- ggplot(overall_df) +
+summer_df <- overall_df %>%
+  mutate(month = month(date)) %>%
+         # hour = hour(date)) %>%
+  filter(month >= 7 & month <= 8)# & hour == 12)
+
+g1 <- ggplot(summer_df) +
   geom_point(aes(lmo/zv, st)) +
   labs(x = 'Mixing:Volume depth', y = 'Energy') +
   geom_vline(xintercept = 1, linetype="dashed") +
-  xlim(0, 5) +
+  xlim(0, 10) +
   theme_minimal()
 
-g2 <- ggplot(overall_df) +
+g2 <- ggplot(summer_df) +
   geom_point(aes(lmo/zg, st)) +
   labs(x = 'Mixing:Avg density depth', y = 'Energy') +
   geom_vline(xintercept = 1, linetype="dashed") +
-  xlim(0, 5) +
+  xlim(0, 10) +
   theme_minimal()
 
-g3 <- ggplot(overall_df,aes(zg, zv)) +
-  geom_point(aes(zg, zv, col = st)) +
-  labs(x = 'Avg density depth', y = 'Volume depth', col = 'Mixing depth') +
+g3 <- ggplot(summer_df) +
+  geom_point(aes(upper/zg, st)) +
+  labs(x = 'Upper:Avg density depth', y = 'Energy') +
+  geom_vline(xintercept = 1, linetype="dashed") +
+  xlim(0, 10) +
   theme_minimal()
 
-g1 / g2 / g3
+g4 <- ggplot(summer_df,aes(zg, upper)) +
+  geom_point(aes(zg, upper, col = st)) +
+  labs(x = 'Avg density depth', y = 'Metalimnion depth', col = 'Stability') +
+  theme_minimal()
 
+g5 <- ggplot(summer_df,aes(zg, lmo)) +
+  geom_point(aes(zg, lmo, col = st)) +
+  labs(x = 'Avg density depth', y = 'Mixing depth', col = 'Stability') +
+  ylim(0,30)+
+  theme_minimal()
+
+g6 <- ggplot(summer_df,aes(upper, lmo)) +
+  geom_point(aes(upper, lmo, col = st)) +
+  labs(x = 'Metalimnion depth', y = 'Mixing depth', col = 'Stability') +
+  ylim(0,30)+
+  theme_minimal()
+
+g1 / g2 / g3 / g4 / g5 / g6
+
+ggplot(summer_df) +
+  geom_point(aes(date, lmo/zg, col = st)) + ylim(0,10)
 
 
