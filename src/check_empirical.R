@@ -67,11 +67,12 @@ nmae = (1/nrow(pred.data) * sum(abs(pred.data$.fitted - pred.data$st))) /
 rmse = sqrt((1/nrow(pred.data) * sum((pred.data$.fitted - pred.data$st)^2)))
 nse = 1 - (sum((pred.data$.fitted - pred.data$st)^2))/(sum((pred.data$st - mean(pred.data$st,na.rm = TRUE))^2))
 
+length(unique(df$lake))
   
 ggplot(df ) +
   geom_point(aes(lmozv, st, col = log10(MaxDepth_m))) +
   geom_line(data = predicted_st, aes(lmozv, st)) +
-  xlim(0,10) + ylim(0, 1000) +
+  # xlim(0,10) + ylim(0, 1000) +
   geom_vline(xintercept = 1.0, linetype = 'dashed') +
   scale_color_gradientn(colors = met.brewer("Hokusai1", n=100)) +
   geom_line(data = augment(fit), aes(lmozv, .fitted), col = 'red') +
