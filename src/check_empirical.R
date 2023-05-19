@@ -67,13 +67,40 @@ nmae = (1/nrow(pred.data) * sum(abs(pred.data$.fitted - pred.data$st))) /
 rmse = sqrt((1/nrow(pred.data) * sum((pred.data$.fitted - pred.data$st)^2)))
 nse = 1 - (sum((pred.data$.fitted - pred.data$st)^2))/(sum((pred.data$st - mean(pred.data$st,na.rm = TRUE))^2))
 
-length(unique(df$lake))
+length(unique(df$LakeID))
   
 ggplot(df ) +
   geom_point(aes(lmozv, st, col = log10(MaxDepth_m))) +
   geom_line(data = predicted_st, aes(lmozv, st)) +
-  # xlim(0,10) + ylim(0, 1000) +
+  xlim(0,10) + ylim(0, 10000) +
   geom_vline(xintercept = 1.0, linetype = 'dashed') +
   scale_color_gradientn(colors = met.brewer("Hokusai1", n=100)) +
   geom_line(data = augment(fit), aes(lmozv, .fitted), col = 'red') +
   theme_minimal()
+
+ggplot(df ) +
+  geom_point(aes(log10(lmozv), log10(st), col = log10(MaxDepth_m))) +
+  # geom_line(data = predicted_st, aes(lmozv, st)) +
+  # xlim(0,100) +
+  # ylim(0, 10000) +
+  geom_vline(xintercept = 10^0, linetype = 'dashed') +
+  scale_color_gradientn(colors = met.brewer("Hokusai1", n=100)) +
+  labs(x = 'Mixing:Volume depth', y = 'Stability') +
+  # geom_line(data = augment(fit), aes(lmozv, .fitted), col = 'red') +
+  theme_minimal()
+
+plot_df <- c()
+for (lakename in unique(df$LakeID)){
+  plot_df <- rbind(plot_df, df %>% dplyr::filter(LakeID == lakename))
+  ggplot(plot_df ) +
+    geom_point(aes(lmozv, st, col = log10(MaxDepth_m))) +
+    # geom_line(data = predicted_st, aes(lmozv, st)) +
+    xlim(0,10) + ylim(0, 1000) +
+    geom_vline(xintercept = 1.0, linetype = 'dashed') +
+    scale_color_gradientn(colors = met.brewer("Hokusai1", n=100)) +
+    # geom_line(data = augment(fit), aes(lmozv, .fitted), col = 'red') +
+    # facet_wrap(~ LakeID) +
+    theme_minimal()
+  ggsave(paste0('../figs/analysis_pilla/', lakename, '.png'))
+  
+}
