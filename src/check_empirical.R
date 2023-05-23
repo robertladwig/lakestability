@@ -153,6 +153,11 @@ ggplot(df ) +
   # geom_line(data = augment(fit), aes((lmo/MaxDepth_m)/zv, .fitted), col = 'red') +
   theme_minimal()
 
+
+#### START
+
+df = df %>%
+  mutate(SecchitoVolume = Secchi_m/zv)
 ggplot(df ) +
   geom_point(aes(MaxDepth_m, zg/zv, col = log10(st), size = scale(lmo))) +
   # geom_line(data = predicted_st, aes(lmozv, st)) +
@@ -161,6 +166,76 @@ ggplot(df ) +
   scale_color_gradientn(colors = met.brewer("Hokusai1", n=100)) +
   # geom_line(data = augment(fit), aes((lmo/MaxDepth_m)/zv, .fitted), col = 'red') +
   theme_minimal()
+
+ggplot(df ) +
+  geom_point(aes(st, zg/zv, col = log10(MaxDepth_m), size = scale(lmo))) +
+  # geom_line(data = predicted_st, aes(lmozv, st)) +
+  # xlim(0, 1) + ylim(0, 10000) +
+  # geom_vline(xintercept = 1.0, linetype = 'dashed') +
+  scale_color_gradientn(colors = met.brewer("Hokusai1", n=100)) +
+  # geom_line(data = augment(fit), aes((lmo/MaxDepth_m)/zv, .fitted), col = 'red') +
+  theme_minimal()
+
+ggplot(df ) +
+  geom_point(aes(zg, Secchi_m/zv, col = log10(MaxDepth_m), size = scale(lmo))) +
+  # geom_line(data = predicted_st, aes(lmozv, st)) +
+  # xlim(0, 1) + ylim(0, 10000) +
+  # geom_vline(xintercept = 1.0, linetype = 'dashed') +
+  scale_color_gradientn(colors = met.brewer("Hokusai1", n=100)) +
+  # geom_line(data = augment(fit), aes((lmo/MaxDepth_m)/zv, .fitted), col = 'red') +
+  theme_minimal()
+
+
+model <- lm((zg) ~ Secchi_m/zv, data = df)
+summary(model)
+coef(model)
+
+secchi <- seq(min(df$Secchi_m, na.rm = T), max(df$Secchi_m, na.rm = T), 0.1)
+zv <- seq(min(df$zv, na.rm = T), max(df$zv, na.rm = T), length.out = length(secchi))
+ratio <- seq(min(df$Secchi_m/df$zv, na.rm = T), max(df$Secchi_m/df$zv, na.rm = T), length.out = length(secchi))
+Counts.exponential2 <- (predict(model,list("Secchi_m"=secchi, "zv" = zv)))
+predicted_st = data.frame('zg' = Counts.exponential2, 'SecchimTozv' = ratio)
+
+ggplot(df ) +
+  geom_point(aes(Secchi_m/zv,  zg, col = log10(st), size = scale(lmo))) +
+  # geom_line(data = predicted_st, aes(lmozv, st)) +
+  # xlim(0, 1) + ylim(0, 10000) +
+  # geom_vline(xintercept = 1.0, linetype = 'dashed') +
+  scale_color_gradientn(colors = met.brewer("Hokusai1", n=100)) +
+  # geom_line(data = augment(fit), aes((lmo/MaxDepth_m)/zv, .fitted), col = 'red') +
+  theme_minimal()
+
+
+ggplot(df ) +
+  geom_point(aes(Secchi_m,  zg, col = log10(st), size = scale(lmo))) +
+  # geom_line(data = predicted_st, aes(lmozv, st)) +
+  # xlim(0, 1) + ylim(0, 10000) +
+  # geom_vline(xintercept = 1.0, linetype = 'dashed') +
+  scale_color_gradientn(colors = met.brewer("Hokusai1", n=100)) +
+  # geom_line(data = augment(fit), aes((lmo/MaxDepth_m)/zv, .fitted), col = 'red') +
+  theme_minimal()
+
+
+ggplot(df ) +
+  geom_point(aes(Secchi_m/zv, st, col = log10(st), size = scale(lmo))) +
+  # geom_line(data = predicted_st, aes(lmozv, st)) +
+  # xlim(0, 1) + ylim(0, 10000) +
+  # geom_vline(xintercept = 1.0, linetype = 'dashed') +
+  scale_color_gradientn(colors = met.brewer("Hokusai1", n=100)) +
+  # geom_line(data = augment(fit), aes((lmo/MaxDepth_m)/zv, .fitted), col = 'red') +
+  theme_minimal()
+
+
+ggplot(df ) +
+  geom_point(aes((Secchi_m/zv)/zv, st, col = log10(st), size = scale(lmo))) +
+  # geom_line(data = predicted_st, aes(lmozv, st)) +
+  # xlim(0, 1) + ylim(0, 10000) +
+  # geom_vline(xintercept = 1.0, linetype = 'dashed') +
+  scale_color_gradientn(colors = met.brewer("Hokusai1", n=100)) +
+  # geom_line(data = augment(fit), aes((lmo/MaxDepth_m)/zv, .fitted), col = 'red') +
+  theme_minimal()
+
+
 
 ggplot(df ) +
   geom_point(aes(MaxDepth_m, zg/zv, col = log10(lmo))) +
@@ -190,7 +265,7 @@ sc.info <- scale(df_red)
 # mutate(Spiny = (ifelse(Spiny > 0, 1, 0)))
 df.data <- na.omit(as.data.frame(scale(df_red)))
 # df.data$Spiny = df.data.spiny$Spiny
-boruta_output <- Boruta(st ~ .,
+boruta_output <- Boruta(zg ~ .,
                         data = df.data, doTrace=2,
                         maxRuns = 1e5)  # perform Boruta search
 boruta_signif <- names(boruta_output$finalDecision[boruta_output$finalDecision %in% c("Confirmed", "Tentative")])  # collect Confirmed and Tentative variables
@@ -204,6 +279,12 @@ boruta.df <- attStats(final.boruta)
 boruta_signif =getSelectedAttributes(final.boruta, withTentative = F)
 print(boruta.df)
 print(boruta_signif)
+
+summary(lm(zg ~ surf_temp + Secchi_m  + swr + lmo, data = df))
+summary(lm(zg ~ surf_temp + Secchi_m/zv  + swr + lmo, data = df))
+summary(lm(zg ~ Secchi_m/zv , data = df))
+
+
 
 summary(lm(log10(st) ~ zg/zv, data = df))
 summary(lm(log10(st) ~ zv, data = df))
