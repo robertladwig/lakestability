@@ -185,8 +185,11 @@ ggplot(df ) +
   # geom_line(data = augment(fit), aes((lmo/MaxDepth_m)/zv, .fitted), col = 'red') +
   theme_minimal()
 
-
-model <- lm((zg) ~ Secchi_m/zv, data = df)
+model <- lm((zg) ~ (Secchi_m/zv), data = df)
+model <- lm(log10(zg) ~ SecchitoVolume, data = df)
+model <- lm(log10(zg) ~ log10(SecchitoVolume), data = df)
+model <- lm(formula = (zg) ~ pred, data = df %>% mutate(pred = Secchi_m/zv))
+# model <- lm((zg) ~ Secchi_m/zv, data = df)
 summary(model)
 coef(model)
 
