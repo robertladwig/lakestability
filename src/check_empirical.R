@@ -47,6 +47,7 @@ df <- read_csv(file = '../data/processed_data.csv')
 
 df <- df %>%
   filter(lmo <= MaxDepth_m & zg <= MaxDepth_m) %>%
+  mutate(MeanDepth_m = ifelse(is.na(MeanDepth_m), Volume_km3/SurfaceArea_km2 * 1000, MeanDepth_m)) %>%
   mutate(
     length = sqrt((3 * Volume_km3 * 1e9) / (pi * MaxDepth_m)),
     z_crit = 0.493 * Secchi_m  + sqrt(0.493**2 * Secchi_m**2 + 0.0006 * length * lmo),
@@ -76,6 +77,40 @@ z2 <- ggplot(df ) +
   scale_color_gradientn(colors = met.brewer("Hokusai1", n=100)) +
   # geom_line(data = augment(fit), aes((lmo/MaxDepth_m)/zv, .fitted), col = 'red') +
   theme_minimal()
+
+ggplot(df %>% filter(LakeID < 100000) ) +
+  geom_point(aes(zg/zv,st, col = (MaxDepth_m))) +
+  # geom_line(data = predicted_st, aes(lmozv, st)) +
+  # xlim(1, 1.10) + ylim(0, 1000) +
+  xlab("gravity depth:volume depth (m)") + ylab("Stability (J/m2)")+ labs(colour = "Max. depth (m)") +
+  # geom_vline(xintercept = 1.0, linetype = 'dashed') +
+  scale_color_gradientn(colors = met.brewer("Hokusai1", n=100)) +
+  facet_wrap(~ LakeID, scales = 'free') +
+  # geom_line(data = augment(fit), aes((lmo/MaxDepth_m)/zv, .fitted), col = 'red') +
+  theme_minimal()
+
+ggplot(df %>% filter(LakeID < 100000) ) +
+  geom_point(aes( z_crit/MeanDepth_m,st, col = (MaxDepth_m))) +
+  # geom_line(data = predicted_st, aes(lmozv, st)) +
+  # xlim(1, 1.10) + ylim(0, 1000) +
+  xlab("gravity depth:volume depth (m)") + ylab("Stability (J/m2)")+ labs(colour = "Max. depth (m)") +
+  # geom_vline(xintercept = 1.0, linetype = 'dashed') +
+  scale_color_gradientn(colors = met.brewer("Hokusai1", n=100)) +
+  facet_wrap(~ LakeID, scales = 'free') +
+  # geom_line(data = augment(fit), aes((lmo/MaxDepth_m)/zv, .fitted), col = 'red') +
+  theme_minimal()
+
+ggplot(df  %>% filter(LakeID < 500000) ) +
+  geom_point(aes((zg/zv), z_crit/MeanDepth_m )) + #Secchi_m/zv  z_crit/MeanDepth_m
+  # geom_line(data = predicted_st, aes(lmozv, st)) +
+  xlab("gravity depth (m)") + ylab("critical depth:mean depth (m)")+ labs(colour = "Max. depth (m)") +
+  # xlim(0, 100) + #ylim(0, 10000) +
+  # geom_hline(yintercept = 1.0, linetype = 'dashed') +
+  scale_color_gradientn(colors = met.brewer("Hokusai1", n=100)) +
+  facet_wrap(~ LakeID, scales = 'free') +
+  # geom_line(data = augment(fit), aes((lmo/MaxDepth_m)/zv, .fitted), col = 'red') +
+  theme_minimal()
+
 
 
 z3 <- ggplot(df ) +
@@ -119,6 +154,7 @@ z6 <- ggplot(df ) +
   scale_color_gradientn(colors = met.brewer("Hokusai1", n=100)) +
   # geom_line(data = augment(fit), aes((lmo/MaxDepth_m)/zv, .fitted), col = 'red') +
   theme_minimal()
+
 
 
 
