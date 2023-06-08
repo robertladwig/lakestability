@@ -55,8 +55,57 @@ df <- df %>%
     zcrit_meanz = z_crit / MeanDepth_m,
     SecchitoVolume = Secchi_m/zv)
 
+df$depthCat <- cut(df$MaxDepth_m, breaks = c(0,10,50,150,1000,Inf), labels = c("Shallow","Medium","Deep", "Deeper", "Super deep"))
 
+df_info <- data.frame('LakeID' = NULL, 
+                      'Slope' = NULL,
+                      cv = NULL,
+                      Latitude = NULL,
+                      Longitude = NULL,
+                      Elevation_m = NULL,
+                      SurfaceArea_km2 = NULL,
+                      Volume_km3 = NULL,
+                      MaxDepth_m = NULL,
+                      MeanDepth_m = NULL,
+                      Secchi_m = NULL)
+for (i in unique(df$LakeID)){
+  data = df %>%
+    filter(LakeID == i)
+  
+  model <- summary(lm(st ~ zg -zv, data = data))
+  
+  df_info <- rbind(df_info, data.frame('LakeID' = mean(data$LakeID), 
+                        'Slope' = model$coefficients[2],
+                        cv = mean(data$zv),
+                        Latitude = mean(data$Latitude),
+                        Longitude = mean(data$Longitude),
+                        Elevation_m = mean(data$Elevation_m),
+                        SurfaceArea_km2 = mean(data$SurfaceArea_km2),
+                        Volume_km3 = mean(data$Volume_km3),
+                        MaxDepth_m = mean(data$MaxDepth_m),
+                        MeanDepth_m = mean(data$MeanDepth_m),
+                        Secchi_m = mean(data$Secchi_m)))
+}
+df_info$depthCat <- cut(df_info$MaxDepth_m, breaks = c(0,10,50,150,1000,Inf), labels = c("Shallow","Medium","Deep", "Deeper", "Super deep"))
 
+ggplot(df_info) +
+  geom_point(aes(MaxDepth_m, Slope)) 
+ggplot(df_info) +
+  geom_point(aes(MeanDepth_m, Slope))
+ggplot(df_info) +
+  geom_point(aes(MeanDepth_m, Slope, col = log10(MaxDepth_m))) +
+  facet_wrap(~ depthCat, scales = 'free')
+
+ggplot(df ) +
+  geom_point(aes(zg-zv, st, col = log10(MaxDepth_m))) +
+  # geom_line(data = predicted_st, aes(lmozv, st)) +
+  # xlim(0, 1) + ylim(0, 10000) +
+  # geom_vline(xintercept = 1.0, linetype = 'dashed') +
+  xlab("gravity depth - volume depth (m)") + ylab("Stability (J/m2)")+ labs(colour = 'Max. depth (m)') +
+  scale_color_gradientn(colors = met.brewer("Benedictus", n=100)) +
+  facet_wrap(~ depthCat, scales = 'free') +
+  # geom_line(data = augment(fit), aes((lmo/MaxDepth_m)/zv, .fitted), col = 'red') +
+  theme_minimal()
 
 z1 <- ggplot(df ) +
   geom_point(aes(MaxDepth_m, zg/zv, col = log10(st))) +
