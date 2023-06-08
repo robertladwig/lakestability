@@ -94,7 +94,7 @@ schmidt.stability_idso = function(wtr, depths, bthA, bthD, sal = 0){
   
   # St_perLayer = approx(layerD, St_perLayer, orig_depths)$y
   
-  return(data.frame('St' = St, 'Zv' = Zcv, 'Zg' = Zg))
+  return(data.frame('St' = St, 'Zv' = Zcv, 'Zg' = Zg, 'meanRho' = mean_density))
   
 }
 
@@ -306,6 +306,7 @@ df_schmidt <- data.frame(sampledate = NULL,
                         secchi = NULL,
                         airTemp = NULL,
                         windSpd = NULL,
+                        surfTemp = NULL,
                         jb = NULL,
                         ux = NULL,
                         lmo = NULL,
@@ -313,7 +314,8 @@ df_schmidt <- data.frame(sampledate = NULL,
                         lmo2 = NULL,
                         zcrit2 = NULL,
                         rad = NULL,
-                        zg_temp = NULL)
+                        zg_temp = NULL,
+                        meanRho = NULL)
 
 for (time in unique(df_watTemp$sampledate)){
   
@@ -369,6 +371,7 @@ for (time in unique(df_watTemp$sampledate)){
                           secchi = anxi$secnview,
                           airTemp = anxi$airtemp,
                           windSpd = anxi$windspd,
+                          surfTemp = data$wtemp[1],
                           jb = meteo$jb,
                           ux = meteo$ux,
                           lmo = meteo$lmo,
@@ -376,13 +379,39 @@ for (time in unique(df_watTemp$sampledate)){
                           lmo2 = meteo$lmo2,
                           zcrit2 = z_crit2,
                           rad = meteo$ShortWave,
-                          zg_temp = zg_temp))
+                          zg_temp = zg_temp,
+                          meanRho = results$meanRho))
   
 }
 
-
+df_schmidt %>%
+  mutate(year = year(sampledate)) %>%
+  # group_by(year) %>%
+  summarise(meanSurfTemp = mean(surfTemp))
 ggplot(df_schmidt) +
   geom_line(aes(zg/zv, st))
+
+ggplot(df_schmidt %>% mutate(mixing = ifelse(meta_upper/zv > 1, 'below', 'above'))) +
+  geom_line(aes(zg/zv, st, col =mixing))
+
+ggplot(df_schmidt) +
+  geom_point(aes(zg/zv, meanRho))
+
+ggplot(df_schmidt %>% mutate(year = year(sampledate), doy = yday(sampledate))) +
+  geom_line(aes(doy , zg/zv, group = year, col = year))
+
+ggplot(df_schmidt) +
+  geom_point(aes(surfTemp, meanRho, col = zg/zv))
+
+
+df_seasonal = df_schmidt %>%
+  mutate(doy = yday(sampledate)) %>%
+  group_by(doy) %>%
+  summarise_all(mean)
+ggplot(df_schmidt %>% mutate(doy = yday(sampledate)) ) +
+  geom_point(aes(zg/zv, meta_upper/zv, col = doy)) +
+  geom_path(data = df_seasonal , aes(zg/zv, meta_upper/zv, col = doy)) +
+  theme_minimal()
 
 ggplot(df_schmidt) +
   geom_point(aes(sampledate, zg, col = "Mass center")) +
@@ -398,7 +427,14 @@ ggplot(df_schmidt) +
   theme_minimal()
 
 ggplot(df_schmidt) +
-  geom_point(aes(sampledate, zg/zv, col = st) )
+  geom_point(aes(sampledate, zg/zv, col = st) ) +
+  geom_line(aes(sampledate, zg/zv, col = st) )
+
+ggplot(df_schmidt) +
+  geom_point(aes(surfTemp, zg/zv, col = st) ) 
+
+ggplot(df_schmidt %>% filter(surfTemp > 15.72)) +
+  geom_point(aes(zcrit2/meanDepth, zg/zv, col = airTemp) ) 
 
 ggplot(df_schmidt) +
   geom_point(aes(sampledate, zcrit/meanDepth, col = scale(st)) )
@@ -441,3 +477,124 @@ g <- ggplot() +
   theme_minimal(); g
 
 # g + transition_time(sampledate)
+
+
+# HOURLY DATA
+
+df_wraw <- read.csv("~/Dropbox/mendota_interp/NTL_observed_temp.csv")
+df_watTemp = df_wraw %>%
+  mutate(sampledate = (paste0(substr(sampledate, 1, 10),' ',sprintf("%02d", as.numeric(hour)),':00:00')),
+         year = year(sampledate)) %>%
+  mutate(sampledate = as.POSIXct(datetime))
+
+meteo <- read.csv('../data/NLDAS2_Mendota_1979_2016_cell_5_GLMReady_cut_timezonecorr_snow.csv') 
+df_meteo <- meteo  %>%
+  mutate(year = year(Date))
+
+
+
+df_hypso <- read.csv("../data/bathymetry.csv")
+
+depths <- df_hypso$Depth_meter#seq(min(df_hypso$Depth_meter), max(df_hypso$Depth_meter), 0.1)
+areas <- df_hypso$Area_meterSquared#approx(df_hypso$Depth_meter, df_hypso$Area_meterSquared, depths)$y
+
+meanDepth = sum(areas)/max(areas)
+
+df_schmidt <- data.frame(sampledate = NULL,
+                         st = NULL,
+                         zv = NULL,
+                         zg = NULL,
+                         meta_upper = NULL,
+                         meta_lower = NULL,
+                         thermDep = NULL,
+                         cenBuoy = NULL,
+                         # secchi = NULL,
+                         airTemp = NULL,
+                         windSpd = NULL,
+                         surfTemp = NULL,
+                         jb = NULL,
+                         ux = NULL,
+                         lmo = NULL,
+                         # zcrit = NULL,
+                         lmo2 = NULL,
+                         # zcrit2 = NULL,
+                         rad = NULL,
+                         zg_temp = NULL)
+
+a=1
+for (time in unique(df_watTemp$sampledate)){
+  print((a*100)/length(unique(df_watTemp$sampledate)))
+  data <- df_watTemp %>%
+    filter(sampledate == time)
+  
+  # anxi <- df_secchi %>%
+  #   filter(sampledate == time)
+  
+  meteo <- df_meteo %>%
+    filter(Date == mean(data$sampledate)) %>%
+    mutate(jb = (207 * 10^(-6) * 9.81)/(4180 * 1000) * ShortWave / 1e3 * 1000,
+           ux = sqrt(1.3 *10^(-3) * 1.43 * 10^(-3) * (WindSpeed)^2),
+           lmo = ux^3 /(jb * 0.41),
+           lmo2 = ux^3 /(ShortWave))
+  
+  if (year(mean(data$sampledate) ) > 2016){
+    next
+  }
+  
+  # if (nrow(anxi) == 0){
+  #   idy = which.min(abs(unique(df_secchi$sampledate) - unique(data$sampledate)))
+  #   
+  #   anxi <- df_secchi %>%
+  #     filter(sampledate == unique(df_secchi$sampledate)[idy])
+  # }
+  
+  if (all(is.na(data$wtemp))){
+    next
+  }
+  
+  
+  results <- schmidt.stability_idso(wtr = data$wtemp, depths = data$depth, bthA = areas, bthD = depths)
+  
+  meta <- meta.depths(wtr = data$wtemp, depths = data$depth)
+  td <- thermo.depth(wtr = data$wtemp, depths = data$depth)
+  buoy <- center.buoyancy(wtr = data$wtemp, depths = data$depth)
+  
+  length = 9230 
+  # z_crit = 0.493 * anxi$secnview  + sqrt(0.493**2 * anxi$secnview **2 + 0.0006 * length * meteo$lmo)
+  # z_crit2 = 0.493 * anxi$secnview  + sqrt(0.493**2 * anxi$secnview **2 + 0.0006 * length * meteo$lmo2)
+  
+  zg_temp = approx(data$depth, data$wtemp, (results$Zg))$y
+  
+  df_schmidt <- rbind(df_schmidt, data.frame(sampledate = mean(data$sampledate),
+                                             st = (results$St),
+                                             zv = (results$Zv),
+                                             zg = (results$Zg),
+                                             meta_upper = meta[1],
+                                             meta_lower = meta[2],
+                                             thermDep = td,
+                                             cenBuoy = buoy,
+                                             # secchi = anxi$secnview,
+                                             airTemp = meteo$AirTemp,
+                                             windSpd = meteo$WindSpeed,
+                                             surfTemp = data$wtemp[1],
+                                             jb = meteo$jb,
+                                             ux = meteo$ux,
+                                             lmo = meteo$lmo,
+                                             # zcrit = z_crit,
+                                             lmo2 = meteo$lmo2,
+                                             # zcrit2 = z_crit2,
+                                             rad = meteo$ShortWave,
+                                             zg_temp = zg_temp))
+  a=a+1
+  
+}
+ggplot(df_schmidt) +
+  geom_line(aes(zg/zv, st))
+
+g <- ggplot() +
+  geom_path(data = df_watTemp, aes(wtemp, depth, group = sampledate)) +
+  geom_point(data = df_schmidt, aes(zg_temp, zv+(zg - zv) * 500 , group = sampledate, col = st)) +
+  geom_hline(yintercept = mean(df_schmidt$zv)) +
+  scale_y_continuous(trans = "reverse") +
+  # ylim(8.1,  8.7) +
+  theme_minimal(); g
