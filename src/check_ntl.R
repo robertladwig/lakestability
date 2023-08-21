@@ -268,6 +268,11 @@ ggplot(results) +
   geom_point(aes(mean_rho, St)) +
   facet_wrap(~ lake)
 
+
+ggplot(results) +
+  geom_point(aes(surface_temp , St, col = mean_depth)) 
+
+
 ggplot(results) +
   geom_point(aes(Zg- Zv, St)) +
   facet_wrap(~ lake)
@@ -295,6 +300,11 @@ ggplot(results) +
 ggplot(results) +
   geom_point(aes(mean_rho, Zg- Zv, col = yday(Datetime))) +
   facet_wrap(~ lake)
+
+ggplot(results) +
+  geom_point(aes(mean_rho, Zg- Zv, col = St)) +
+  facet_wrap(~ lake)
+
 
 ggplot(results) +
   geom_point(aes(mean_rho, Zg- Zv, size = mean_depth, col = St), alpha = 0.2) 
