@@ -5,6 +5,7 @@
 # Data set creator:  Emily Stanley - University of Wisconsin 
 # Contact:    -  NTL LTER  - ntl.infomgr@gmail.com
 # Stylesheet v2.11 for metadata conversion into program: John H. Porter, Univ. Virginia, jporter@virginia.edu 
+setwd("Documents/lakestability/")
 
 inUrl1  <- "https://pasta.lternet.edu/package/data/eml/knb-lter-ntl/29/35/03e232a1b362900e0f059859abe8eb97" 
 infile1 <- tempfile()
@@ -307,6 +308,33 @@ ggplot(results) +
 
 
 ggplot(results) +
+  geom_point(aes(St, (Zg- Zv) * mean_rho, col = yday(Datetime))) +
+  facet_wrap(~ lake)
+
+test = results %>% mutate(slope = (Zg- Zv) * mean_rho)
+summary(lm(St ~ slope, data = test))
+summary(lm(St ~ mean_depth * g * slope, data = test))
+summary(lm(slope ~ mean_depth, data = test))
+
+ggplot(results) +
+  geom_point(aes(St,  mean_rho, col = yday(Datetime))) +
+  facet_wrap(~ lake)
+
+ggplot(results) +
+  geom_point(aes(St, (Zg- Zv) , col = yday(Datetime))) +
+  facet_wrap(~ lake)
+
+ggplot(results) +
+  geom_point(aes(Datetime, (Zg- Zv) * mean_rho , col = (St))) +
+  facet_wrap(~ lake)
+
+ggplot(results) +
+  geom_point(aes(surface_temp, (Zg- Zv) * mean_rho , col = (lake))) 
+
+summary(lm(slope ~ surface_temp + bottom_temp +mean_depth , data = test))
+summary(lm(slope ~ surface_temp + mean_depth  , data = test))
+
+ggplot(results) +
   geom_point(aes(mean_rho, Zg- Zv, size = mean_depth, col = St), alpha = 0.2) 
 
 ggplot(results) +
@@ -318,6 +346,14 @@ ggplot(results) +
   geom_point(aes(Datetime, St, col = "SchmidtStability")) +
   geom_point(aes(Datetime, mean_rho, col = "mean_rho")) +
   geom_point(aes(Datetime, Zg- Zv, col = "Zg-Zv")) +
+  geom_point(aes(Datetime, g, col = "g")) +
+  geom_point(aes(Datetime, mean_depth, col = "mean_depth")) +
+  facet_wrap(~ lake)
+
+ggplot(results) +
+  geom_point(aes(Datetime, St, col = "SchmidtStability")) +
+  geom_point(aes(Datetime, mean_rho, col = "mean_rho")) +
+  geom_point(aes(Datetime, (Zg- Zv) * mean_rho, col = "Zg-Zv")) +
   geom_point(aes(Datetime, g, col = "g")) +
   geom_point(aes(Datetime, mean_depth, col = "mean_depth")) +
   facet_wrap(~ lake)
