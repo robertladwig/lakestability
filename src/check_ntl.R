@@ -5,7 +5,7 @@
 # Data set creator:  Emily Stanley - University of Wisconsin 
 # Contact:    -  NTL LTER  - ntl.infomgr@gmail.com
 # Stylesheet v2.11 for metadata conversion into program: John H. Porter, Univ. Virginia, jporter@virginia.edu 
-setwd("Documents/lakestability/")
+# setwd("/Documents/lakestability/")
 
 inUrl1  <- "https://pasta.lternet.edu/package/data/eml/knb-lter-ntl/29/35/03e232a1b362900e0f059859abe8eb97" 
 infile1 <- tempfile()
@@ -282,6 +282,15 @@ ggplot(results) +
   geom_point(aes(mean_rho, surface_temp, col = yday(Datetime))) +
   facet_wrap(~ lake)
 
+results$ZgZv = results$Zg - results$Zv
+library(plotly)
+plot_ly(data = results %>% mutate(doy = yday(Datetime)), x=~mean_rho, y=~ZgZv, z=~St, type="scatter3d", mode="markers", color=~doy)
+
+results %>% mutate(doy = yday(Datetime)) %>%
+  group_by(lake) %>%
+  do(p=plot_ly(.,x=~mean_rho, y=~ZgZv, z=~St, type="scatter3d", mode="markers", color=~doy)) %>%
+  subplot(nrows = 8, shareX = TRUE, shareY = TRUE)
+
 ggplot(results) +
   geom_point(aes(Zg- Zv, surface_temp, col = yday(Datetime))) +
   facet_wrap(~ lake)
@@ -302,6 +311,17 @@ ggplot(results) +
   geom_point(aes(mean_rho, Zg- Zv, col = yday(Datetime))) +
   facet_wrap(~ lake)
 
+hyst = results %>% mutate(label = month(Datetime, label = T)) %>%
+  group_by(lake, label) %>%
+  summarise(mean_rho = mean(mean_rho, na.rm = T),
+            mean_ZgZv = mean(Zg - Zv, na.rm = T))
+
+ggplot(results) +
+  geom_point(aes(mean_rho, Zg- Zv, col = (St))) +
+  geom_path(data = hyst, aes( mean_rho,mean_ZgZv)) +
+  annotate(geom = 'label', x =hyst$mean_rho, y = hyst$mean_ZgZv, label = as.character(hyst$label)) +
+  facet_wrap(~ lake, scales = 'free')
+
 ggplot(results) +
   geom_point(aes(mean_rho, Zg- Zv, col = St)) +
   facet_wrap(~ lake)
@@ -311,10 +331,43 @@ ggplot(results) +
   geom_point(aes(St, (Zg- Zv) * mean_rho, col = yday(Datetime))) +
   facet_wrap(~ lake)
 
-test = results %>% mutate(slope = (Zg- Zv) * mean_rho)
+test = results %>% mutate(slope = (Zg- Zv) * mean_rho, g= 9.81)
+
+summary(lm(mean_rho ~ meanTemp + mean_depth , data = test %>% mutate(tempDiff = surface_temp - bottom_temp,
+                                                                     meanTemp = (surface_temp + bottom_temp)/2)))
+
+ggplot(test %>% mutate(tempDiff = surface_temp - bottom_temp,
+                       meanTemp = water.density((surface_temp + bottom_temp)/2))) +
+  geom_point(aes(mean_rho, meanTemp, col = yday(Datetime)))
+
+ggplot(test %>% mutate(tempDiff = surface_temp - bottom_temp,
+                       meanTemp = water.density((surface_temp + bottom_temp)/2))) +
+  geom_point(aes(mean_rho, surface_temp, col = yday(Datetime)))
+
+ggplot(test %>% mutate(tempDiff = surface_temp - bottom_temp,
+                       meanTemp = water.density((surface_temp + bottom_temp)/2))) +
+  geom_point(aes(mean_rho, bottom_temp, col = yday(Datetime)))
+
+summary(lm(mean_rho ~ surface_temp + bottom_temp + yday(Datetime) , data = test %>% mutate(tempDiff = surface_temp - bottom_temp,
+                                                                     meanTemp = (surface_temp + bottom_temp)/2)))
+
+summary(lm(ZgZv ~ surface_temp + bottom_temp + therm_dep , data = test %>% mutate(tempDiff = surface_temp - bottom_temp,
+                                                                                           meanTemp = (surface_temp + bottom_temp)/2)))
+
+summary(lm(St ~ mean_rho + ZgZv + g + mean_depth, data = test))
+
+plot(lm(mean_rho ~ surface_temp + bottom_temp + yday(Datetime), data = test %>% mutate(tempDiff = surface_temp - bottom_temp,
+                                                                                          meanTemp = (surface_temp + bottom_temp)/2)))
+
+summary(lm(mean_rho ~ yday(Datetime), data = test %>% mutate(tempDiff = surface_temp - bottom_temp,
+                                                                                          meanTemp = (surface_temp + bottom_temp)/2)))
+
 summary(lm(St ~ slope, data = test))
 summary(lm(St ~ mean_depth * g * slope, data = test))
 summary(lm(slope ~ mean_depth, data = test))
+ggplot(test)+ 
+  geom_point(aes(slope,  surface_temp, col = yday(Datetime))) +
+  facet_wrap(~ lake)
 
 ggplot(results) +
   geom_point(aes(St,  mean_rho, col = yday(Datetime))) +
@@ -331,8 +384,12 @@ ggplot(results) +
 ggplot(results) +
   geom_point(aes(surface_temp, (Zg- Zv) * mean_rho , col = (lake))) 
 
-summary(lm(slope ~ surface_temp + bottom_temp +mean_depth , data = test))
+summary(lm(slope ~ surface_temp + bottom_temp +mean_depth + therm_dep , data = test))
 summary(lm(slope ~ surface_temp + mean_depth  , data = test))
+summary(lm(slope ~ surface_temp   , data = test))
+summary(lm(St ~ slope   , data = test))
+summary(lm(St ~ surface_temp + mean_depth  , data = test))
+summary(lm(slope ~  mean_depth  , data = test))
 
 ggplot(results) +
   geom_point(aes(mean_rho, Zg- Zv, size = mean_depth, col = St), alpha = 0.2) 
